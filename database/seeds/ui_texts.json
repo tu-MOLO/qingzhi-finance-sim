@@ -1447,12 +1447,6 @@
       "sort_order": 1790
     },
     {
-      "key": "field.living_mirror",
-      "area": "field",
-      "text": "与「基础信息」里的家庭支持是同一个数字，两边改哪一边都一样",
-      "sort_order": 1800
-    },
-    {
       "key": "section.settings",
       "area": "section",
       "text": "智能体接口",

@@ -47,6 +47,7 @@ exe = EXE(  # noqa: F821
     a.datas,
     [],
     name="青智方舟",
+    icon=str(ROOT / "bundle" / "app.ico"),
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

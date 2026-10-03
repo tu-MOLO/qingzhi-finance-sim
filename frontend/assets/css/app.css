@@ -19,10 +19,12 @@ body {
 /* ---------------------------------------------------------- 顶栏 */
 .topbar { background: var(--paper); border-bottom: var(--rule); position: sticky; top: 0; z-index: 20; }
 .topbar-in { max-width: var(--shell-max); margin: 0 auto; padding: 18px var(--shell-pad); display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
-.brand { display: flex; align-items: baseline; gap: 14px; }
-/* 品牌标记内是 SVG，颜色由 currentColor 取这里的文字色，尺寸与圆角与顶栏一致 */
-.brand .mark { width: 30px; height: 30px; border-radius: 7px; background: var(--red-600); display: flex; align-items: center; justify-content: center; flex: none; color: #fff; line-height: 0; margin-bottom: 2px; }
-.brand .mark svg { display: block; }
+.brand { display: flex; align-items: center; gap: 14px; }
+/* 品牌标记内是 SVG，颜色由 currentColor 取这里的文字色。
+   标记取正方，边长等于右侧标题（22px）与副标题（12px）两行行高之和，
+   于是上下边缘正好与标题、副标题各自对齐 */
+.brand .mark { width: calc(22px * 1.6 + 12px * 1.6); height: calc(22px * 1.6 + 12px * 1.6); flex: none; border-radius: 8px; background: var(--red-600); display: flex; align-items: center; justify-content: center; color: #fff; line-height: 0; }
+.brand .mark svg { display: block; width: 100%; height: 100%; }
 .brand h1 { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0; letter-spacing: .04em; }
 .brand .sub { font-size: 12px; color: var(--ink-500); letter-spacing: .02em; }
 .meta { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -97,6 +99,8 @@ select.cselect-native { position: absolute; inset: 0; width: 100%; height: 100%;
 .goal-pick .cselect { max-width: 300px; }
 .field { margin-bottom: 14px; }
 .field.last { margin-bottom: 0; }
+/* 同一行里比邻格矮的字段，内容在格内垂直居中，免得贴着格顶留一段空 */
+.field.vcenter { display: flex; flex-direction: column; justify-content: center; }
 .hint { font-size: 11.5px; color: var(--ink-400); margin-top: 4px; }
 .muted-note { font-size: 12.5px; color: var(--ink-500); margin: 0 0 10px; line-height: 1.75; }
 .param-list { font-size: 12px; color: var(--ink-400); margin: 0; font-family: var(--mono); line-height: 1.9; }
@@ -303,10 +307,12 @@ select.cselect-native { position: absolute; inset: 0; width: 100%; height: 100%;
 
 /* ---------- 定位条：先说清对谁、做什么、不做什么 ---------- */
 
-.position { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 14px 20px; align-items: start; padding: 16px 18px; border-radius: var(--r-lg); background: var(--paper-2); border: 1px solid var(--ink-100); }
+.position { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 20px; align-items: start; padding: 16px 18px; border-radius: var(--r-lg); background: var(--paper-2); border: 1px solid var(--ink-100); }
 .position .pk { display: block; font-size: 11.5px; color: var(--ink-400); margin-bottom: 4px; }
 .position .pv { font-size: 13px; line-height: 1.7; color: var(--ink-900); }
 .position .pos-item:nth-child(3) .pv { color: var(--ink-500); }
+/* 入口不在右侧挤占一列，改为三块说明下方横跨整块的一根长条 */
+.position #pos-edit { grid-column: 1 / -1; width: 100%; padding: 8px 10px; }
 
 /* ---------- 推演五步 ---------- */
 

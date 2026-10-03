@@ -100,7 +100,10 @@ def _replace_children(conn: sqlite3.Connection, archetype_id: str,
     if sources is not None:
         conn.execute("DELETE FROM archetype_income_sources WHERE archetype_id = ?", (archetype_id,))
         for source in sources:
-            payload = {key: source.get(key) for key in SOURCE_COLUMNS}
+            # 没有窗口的来源（兼职、奖学金）不会带上起止月份等字段，
+            # 缺省值留给表结构补，避免用 NULL 覆盖非空列导致整条画像写入失败
+            payload = {key: source.get(key) for key in SOURCE_COLUMNS
+                       if source.get(key) is not None}
             payload["archetype_id"] = archetype_id
             base.upsert(conn, "archetype_income_sources", payload)
     if goal_rows is not None:

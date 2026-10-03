@@ -179,6 +179,10 @@ def validate(profile: dict, catalog: Catalog) -> None:
         code = item["source_type"]
         if code not in allowed_sources:
             raise ValidationError("income_sources", f"收入来源 {code} 不在字典定义内", code="P-01-05")
+        # 未启用的来源不参与推演，金额区间与起止月份不作校验：
+        # 允许使用者先把值填好、再决定是否启用，不选中的那一份不该报错
+        if not item["enabled"]:
+            continue
         prefix = f"sources.{code}"
         label = catalog.dict_name("income_source", code, code)
         if not (0.0 <= item["probability"] <= 1.0):

@@ -58,9 +58,17 @@
     });
   }
 
-  /* 家庭支持在基础信息与收入来源里是同一个数字，两处都能改 */
-  function mirrorUsed(fields) {
-    return fields.some(function (field) { return field.mirrorLiving; });
+  /* 窗口字段没有值时给一个落在推演范围内的默认值。
+     未勾选或刚勾选的来源若留着 0 月份，会被判成填写错误 */
+  function fieldDefault(key) {
+    if (key === "start_month") { return 1; }
+    if (key === "end_month") { return Number(el("months").value) || 1; }
+    return 0;
+  }
+
+  /* 未打开的项目不参与推演，数值一并锁住：改了也不生效，索性不让改 */
+  function lockFields(block, on) {
+    block.querySelectorAll(".src-field").forEach(function (input) { input.disabled = !on; });
   }
 
   function renderSources(sourceMap) {
@@ -72,14 +80,14 @@
       var enabled = deterministic ? true : values.enabled === true;
       var fields = sourceFields(definition, values);
       var inputs = fields.map(function (field) {
-        var value = field.value === undefined || field.value === null ? 0 : field.value;
+        var value = field.value === undefined || field.value === null
+          ? fieldDefault(field.key) : field.value;
         return '<div><label>' + Fmt.escapeHtml(field.label) + "</label>" +
           '<input type="number" class="src-field" data-key="' + Fmt.escapeHtml(field.key) + '"' +
           (field.mirrorLiving ? ' data-mirror="living"' : "") +
+          (enabled ? "" : " disabled") +
           ' value="' + Fmt.escapeHtml(value) + '"></div>';
-      }).join("") + (mirrorUsed(fields)
-        ? '<div class="hint src-full">' + Fmt.escapeHtml(Catalog.text("field.living_mirror")) + "</div>"
-        : "");
+      }).join("");
       var toggle = deterministic
         ? '<span class="tag">' + Fmt.escapeHtml(Catalog.text("field.source.deterministic")) + "</span>" +
           '<span class="switch"><input type="checkbox" checked disabled><i></i></span>'
@@ -93,7 +101,9 @@
 
     el("sources").querySelectorAll(".src-on").forEach(function (box) {
       box.addEventListener("change", function () {
-        box.closest(".src").classList.toggle("off", !box.checked);
+        var block = box.closest(".src");
+        block.classList.toggle("off", !box.checked);
+        lockFields(block, box.checked);
         onChange();
       });
     });
@@ -250,6 +260,16 @@
     });
   }
 
+  /* 到期月份的上界是推演时长：时长调短后，超出范围的目标一律收到新时长上，
+     否则保存时必然报一条「到期月份超出推演范围」 */
+  function clampGoalDue() {
+    var months = Number(el("months").value) || 0;
+    if (months <= 0) { return; }
+    el("goals").querySelectorAll(".g-due").forEach(function (input) {
+      if (Number(input.value) > months) { input.value = months; }
+    });
+  }
+
   /* ---------------------------------------------------------- 支出项 */
 
   function gradeAttributes(code) {
@@ -277,6 +297,8 @@
         toggle.checked = false;
         block.classList.add("off");
       }
+      /* 窗口跟着年级变，锁定状态也要跟着变，否则刚启用的来源改不了数值 */
+      lockFields(block, toggle.checked);
     });
     onChange();
   }
@@ -291,26 +313,31 @@
         enabled: true
       };
       var essential = !!attributes.essential;
-      return '<div class="src' + (values.enabled === false ? " off" : "") + '" data-kind="' +
+      var enabled = values.enabled !== false;
+      return '<div class="src' + (enabled ? "" : " off") + '" data-kind="' +
         Fmt.escapeHtml(definition.code) + '">' +
         '<div class="src-top"><span class="src-name">' + Fmt.escapeHtml(definition.name) + "</span>" +
         '<span class="tag">' + Fmt.escapeHtml(Catalog.text(
           essential ? "field.expense.essential" : "field.expense.discretionary")) + "</span>" +
         '<span class="switch"><input type="checkbox" class="src-on"' +
-        (values.enabled !== false ? " checked" : "") + "><i></i></span></div>" +
+        (enabled ? " checked" : "") + "><i></i></span></div>" +
         '<div class="src-grid">' +
         '<div><label>' + Fmt.escapeHtml(Catalog.text("field.expense.amount")) + "</label>" +
-        '<input type="number" class="src-field" data-key="amount" min="0" step="50" value="' +
+        '<input type="number" class="src-field" data-key="amount" min="0" step="50"' +
+        (enabled ? "" : " disabled") + ' value="' +
         Fmt.escapeHtml(values.amount) + '"></div>' +
         '<div><label>' + Fmt.escapeHtml(Catalog.text("field.expense.growth")) + "</label>" +
-        '<input type="number" class="src-field" data-key="growth_rate" min="0" max="0.2" step="0.01" value="' +
+        '<input type="number" class="src-field" data-key="growth_rate" min="0" max="0.2" step="0.01"' +
+        (enabled ? "" : " disabled") + ' value="' +
         Fmt.escapeHtml(values.growth_rate) + '"></div>' +
         "</div></div>";
     }).join("");
 
     el("expenses").querySelectorAll(".src-on").forEach(function (box) {
       box.addEventListener("change", function () {
-        box.closest(".src").classList.toggle("off", !box.checked);
+        var block = box.closest(".src");
+        block.classList.toggle("off", !box.checked);
+        lockFields(block, box.checked);
         onChange();
       });
     });
@@ -500,8 +527,15 @@
     /* 推演时长的默认值来自配置，家庭支持取全国基准值，画像加载后会覆盖 */
     el("months").value = Number(Catalog.state.settings["simulation.default_months"]) || 0;
     el("living").value = Number(Catalog.state.parameters["national_living_cost"]) || 0;
-    ["living", "growth", "initial", "months", "budget-growth", "budget-treat"]
+    /* 首屏那条目标的默认到期月份同样受推演时长约束 */
+    clampGoalDue();
+    ["living", "growth", "initial", "budget-growth", "budget-treat"]
       .forEach(function (id) { el(id).addEventListener("input", onChange); });
+    /* 推演时长变了要把目标的到期月份一起收敛，所以单独绑定 */
+    el("months").addEventListener("input", function () {
+      clampGoalDue();
+      onChange();
+    });
     el("grade").addEventListener("change", function () {
       applyGradeDefaults();
       onChange();
@@ -524,10 +558,13 @@
         global.App.Main.toast(Catalog.message("validation.max_goals"));
         return;
       }
+      var defaultDue = Number(Catalog.state.settings["limits.default_goal_due_month"]) || 1;
+      var months = Number(el("months").value) || 0;
       goals.push({
         name: "",
         amount: Number(Catalog.state.settings["limits.default_goal_amount"]) || 0,
-        due_month: Number(Catalog.state.settings["limits.default_goal_due_month"]) || 1,
+        /* 新建目标的默认到期月份不越过当前的推演时长 */
+        due_month: months > 0 ? Math.min(defaultDue, months) : defaultDue,
         priority: goals.length + 1
       });
       renderGoals(goals.map(function (goal, index) {
