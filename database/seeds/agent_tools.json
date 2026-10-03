@@ -1,0 +1,58 @@
+{
+  "agent_tools": [
+    {
+      "code": "corpus_lookup",
+      "name": "语料检索",
+      "kind": "retrieval",
+      "description": "按术语名称或近似说法在内置语料中检索，返回命中文档的类别、标题、来源与正文摘录。查不到时返回空命中而不是报错。",
+      "handler": "corpus_lookup",
+      "enabled": 1,
+      "sort_order": 10
+    },
+    {
+      "code": "simulation_context",
+      "name": "推演摘要提取",
+      "kind": "context",
+      "description": "从最近一次推演的摘要中提取全部人生目标：名称、金额、到期月、达成概率、中位达成月、延后月数与资金缺口，按优先级排序，主目标排在最前；同时给出风险容量等级与权益上限。摘要缺失时返回空上下文。",
+      "handler": "simulation_context",
+      "enabled": 1,
+      "sort_order": 20
+    },
+    {
+      "code": "scenario_compare",
+      "name": "情景对比提取",
+      "kind": "context",
+      "description": "提取悲观、基准、乐观三档情景下每个目标的达成概率，给出高低差距。",
+      "handler": "scenario_compare",
+      "enabled": 1,
+      "sort_order": 30
+    },
+    {
+      "code": "allocation_profile",
+      "name": "账户分配提取",
+      "kind": "context",
+      "description": "提取四账户的期末结构与分配优先级，识别安全底座是否已填满。",
+      "handler": "allocation_profile",
+      "enabled": 1,
+      "sort_order": 40
+    },
+    {
+      "code": "amount_formatter",
+      "name": "金额与月数格式化",
+      "kind": "format",
+      "description": "把金额换算为万元并保留一位小数，把月数转写为中文表述。金额小于一万时保留元。",
+      "handler": "amount_formatter",
+      "enabled": 1,
+      "sort_order": 50
+    },
+    {
+      "code": "compliance_guard",
+      "name": "合规校验",
+      "kind": "guard",
+      "description": "校验输出是否违反硬约束：未设置目标时不得出现任何数字；任何解释都必须附带免责提示；不得出现收益承诺类措辞。校验不通过时以合规文案替换。",
+      "handler": "compliance_guard",
+      "enabled": 1,
+      "sort_order": 60
+    }
+  ]
+}

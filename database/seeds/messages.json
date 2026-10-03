@@ -1,0 +1,158 @@
+{
+  "messages": [
+    {
+      "code": "disclaimer.simulation",
+      "category": "disclaimer",
+      "title": "假设情景提示",
+      "body": "本结果为基于假设情景的仿真推演，不构成投资建议，不预测任何产品的未来收益。系统不提供任何交易功能，不对接交易接口。",
+      "tone": "notice"
+    },
+    {
+      "code": "disclaimer.term",
+      "category": "disclaimer",
+      "title": "免责提示",
+      "body": "本解释基于公开产品文件与监管文本整理，仅供参考，不构成投资建议，不预测任何产品的未来收益。如需正式的风险承受能力评估，请以销售机构依法开展的评估结果为准。",
+      "tone": "notice"
+    },
+    {
+      "code": "compliance.no_goal",
+      "category": "disclaimer",
+      "title": null,
+      "body": "您当前尚未设置人生目标，暂不生成与本人类似的量化说明。请先设置目标后再次查询。",
+      "tone": "info"
+    },
+    {
+      "code": "validation.need_one_goal",
+      "category": "validation",
+      "title": null,
+      "body": "至少需要保留一个人生目标",
+      "tone": "warn"
+    },
+    {
+      "code": "validation.max_goals",
+      "category": "validation",
+      "title": null,
+      "body": "人生目标最多占据五个位置",
+      "tone": "warn"
+    },
+    {
+      "code": "validation.priority_floor",
+      "category": "validation",
+      "title": null,
+      "body": "顺序从 1 起算，已改回 1",
+      "tone": "warn"
+    },
+    {
+      "code": "validation.term_required",
+      "category": "validation",
+      "title": null,
+      "body": "请先输入一个术语",
+      "tone": "warn"
+    },
+    {
+      "code": "status.simulating",
+      "category": "status",
+      "title": null,
+      "body": "正在对收入与支出做多情景仿真…",
+      "tone": "info"
+    },
+    {
+      "code": "status.recalculating",
+      "category": "status",
+      "title": null,
+      "body": "正在应用新预算并重新推演…",
+      "tone": "info"
+    },
+    {
+      "code": "status.offline",
+      "category": "status",
+      "title": null,
+      "body": "无法连接本地服务，请确认程序处于运行状态",
+      "tone": "error"
+    },
+    {
+      "code": "status.data_missing",
+      "category": "status",
+      "title": null,
+      "body": "配置数据缺失，请先初始化数据库",
+      "tone": "error"
+    },
+    {
+      "code": "status.archetype_missing",
+      "category": "status",
+      "title": null,
+      "body": "未找到该画像",
+      "tone": "warn"
+    },
+    {
+      "code": "status.agent_running",
+      "category": "status",
+      "title": null,
+      "body": "正在生成解释…",
+      "tone": "info"
+    },
+    {
+      "code": "status.agent_insight",
+      "category": "status",
+      "title": null,
+      "body": "正在解读推演结论…",
+      "tone": "info"
+    },
+    {
+      "code": "status.agent_rule_mode",
+      "category": "status",
+      "title": null,
+      "body": "当前为本地规则模式，解释由内置规则生成，不依赖网络",
+      "tone": "info"
+    },
+    {
+      "code": "status.agent_degraded",
+      "category": "status",
+      "title": null,
+      "body": "外部模型未能返回结果，已改用本地规则模式生成",
+      "tone": "warn"
+    },
+    {
+      "code": "status.agent_prompt_missing",
+      "category": "status",
+      "title": null,
+      "body": "请先完成一次推演，再生成结论解读",
+      "tone": "warn"
+    },
+    {
+      "code": "validation.profile_name_required",
+      "category": "validation",
+      "title": null,
+      "body": "请先输入档案名称",
+      "tone": "warn"
+    },
+    {
+      "code": "validation.builtin_not_deletable",
+      "category": "validation",
+      "title": null,
+      "body": "内置财务画像不可删除，只能删除自己保存的档案",
+      "tone": "warn"
+    },
+    {
+      "code": "status.saving",
+      "category": "status",
+      "title": null,
+      "body": "正在保存配置…",
+      "tone": "info"
+    },
+    {
+      "code": "status.saved",
+      "category": "status",
+      "title": null,
+      "body": "配置已保存，即刻生效",
+      "tone": "ok"
+    },
+    {
+      "code": "status.testing",
+      "category": "status",
+      "title": null,
+      "body": "正在测试与模型服务的连接…",
+      "tone": "info"
+    }
+  ]
+}

@@ -1,0 +1,1684 @@
+{
+  "ui_texts": [
+    {
+      "key": "app.name",
+      "area": "app",
+      "text": "青智方舟",
+      "sort_order": 10
+    },
+    {
+      "key": "app.subtitle",
+      "area": "app",
+      "text": "把这笔钱花不花，换算成那个目标会晚多久",
+      "sort_order": 20
+    },
+    {
+      "key": "app.badge.local",
+      "area": "app",
+      "text": "本地运行 · 数据不出本机",
+      "sort_order": 30
+    },
+    {
+      "key": "app.badge.ready",
+      "area": "app",
+      "text": "本地可用",
+      "sort_order": 40
+    },
+    {
+      "key": "app.badge.agent_ready",
+      "area": "app",
+      "text": "配置已就绪",
+      "sort_order": 42
+    },
+    {
+      "key": "app.badge.agent_unset",
+      "area": "app",
+      "text": "配置智能体",
+      "sort_order": 44
+    },
+    {
+      "key": "tab.profile",
+      "area": "tab",
+      "text": "我的情况",
+      "sort_order": 50
+    },
+    {
+      "key": "tab.sandbox",
+      "area": "tab",
+      "text": "看见结论",
+      "sort_order": 60
+    },
+    {
+      "key": "tab.term",
+      "area": "tab",
+      "text": "全部词条",
+      "sort_order": 70
+    },
+    {
+      "key": "tab.settings",
+      "area": "tab",
+      "text": "设置",
+      "sort_order": 75
+    },
+    {
+      "key": "section.base_info",
+      "area": "section",
+      "text": "基础信息",
+      "sort_order": 80
+    },
+    {
+      "key": "section.base_info.note",
+      "area": "section",
+      "text": "用于确定收入与支出的计算基数",
+      "sort_order": 90
+    },
+    {
+      "key": "section.base_info.guide",
+      "area": "section",
+      "text": "不确定怎么填，先在右上加载一份财务画像，再逐项改成自己的数",
+      "sort_order": 95
+    },
+    {
+      "key": "section.base_info.grade_hint",
+      "area": "section",
+      "text": "切换年级会自动套用该阶段常见的收入结构，每一项金额仍可单独改",
+      "sort_order": 96
+    },
+    {
+      "key": "section.income",
+      "area": "section",
+      "text": "收入来源",
+      "sort_order": 100
+    },
+    {
+      "key": "section.income.note",
+      "area": "section",
+      "text": "家庭支持为固定收入，其余为不确定收入，可能整段不发生",
+      "sort_order": 110
+    },
+    {
+      "key": "section.goals",
+      "area": "section",
+      "text": "人生目标",
+      "sort_order": 120
+    },
+    {
+      "key": "section.goals.note",
+      "area": "section",
+      "text": "最多五个目标，优先级数字越小越优先",
+      "sort_order": 130
+    },
+    {
+      "key": "section.budget",
+      "area": "section",
+      "text": "悦己预算",
+      "sort_order": 140
+    },
+    {
+      "key": "section.budget.note",
+      "area": "section",
+      "text": "每月结余是算出来的，不是填出来的：把这两项调小，上面的月度可用结余就会变大",
+      "sort_order": 145
+    },
+    {
+      "key": "section.verdict",
+      "area": "section",
+      "text": "结　论",
+      "sort_order": 170
+    },
+    {
+      "key": "section.results",
+      "area": "section",
+      "text": "推演结果",
+      "sort_order": 180
+    },
+    {
+      "key": "section.decision",
+      "area": "section",
+      "text": "决策方案",
+      "sort_order": 190
+    },
+    {
+      "key": "section.decision.note",
+      "area": "section",
+      "text": "点击方案一，系统自动用新预算重算并刷新全部图表",
+      "sort_order": 200
+    },
+    {
+      "key": "section.term",
+      "area": "section",
+      "text": "词条索引",
+      "sort_order": 210
+    },
+    {
+      "key": "section.term.note",
+      "area": "section",
+      "text": "结论页里带虚线下划线的词可以直接点开，这里列出全部词条备查",
+      "sort_order": 220
+    },
+    {
+      "key": "field.grade",
+      "area": "field",
+      "text": "年级",
+      "sort_order": 240
+    },
+    {
+      "key": "field.living_cost",
+      "area": "field",
+      "text": "家庭支持（元/月）",
+      "sort_order": 250
+    },
+    {
+      "key": "field.initial_balance",
+      "area": "field",
+      "text": "现有积蓄",
+      "sort_order": 260
+    },
+    {
+      "key": "field.initial_balance.hint",
+      "area": "field",
+      "text": "作为仿真的初始余额，没有可填零",
+      "sort_order": 270
+    },
+    {
+      "key": "field.living_growth",
+      "area": "field",
+      "text": "家庭支持年增长率",
+      "sort_order": 280
+    },
+    {
+      "key": "field.living_growth.hint",
+      "area": "field",
+      "text": "取值区间 0 至 0.1",
+      "sort_order": 290
+    },
+    {
+      "key": "field.risk_appetite",
+      "area": "field",
+      "text": "风险偏好档位",
+      "sort_order": 300
+    },
+    {
+      "key": "field.months",
+      "area": "field",
+      "text": "推演时长（个月）",
+      "sort_order": 310
+    },
+    {
+      "key": "field.growth_budget",
+      "area": "field",
+      "text": "成长悦己月度上限",
+      "sort_order": 320
+    },
+    {
+      "key": "field.growth_budget.hint",
+      "area": "field",
+      "text": "能提升未来收入能力的支出：考证、课程、健身、作品集设备",
+      "sort_order": 330
+    },
+    {
+      "key": "field.treat_budget",
+      "area": "field",
+      "text": "体验悦己月度上限",
+      "sort_order": 340
+    },
+    {
+      "key": "field.treat_budget.hint",
+      "area": "field",
+      "text": "纯情绪价值的支出：穿搭、聚餐、短途旅行",
+      "sort_order": 350
+    },
+    {
+      "key": "field.goal.name",
+      "area": "field",
+      "text": "目标名称",
+      "sort_order": 360
+    },
+    {
+      "key": "field.goal.amount",
+      "area": "field",
+      "text": "目标金额",
+      "sort_order": 370
+    },
+    {
+      "key": "field.goal.due",
+      "area": "field",
+      "text": "到期月份",
+      "sort_order": 380
+    },
+    {
+      "key": "field.goal.priority",
+      "area": "field",
+      "text": "优先级",
+      "sort_order": 390
+    },
+    {
+      "key": "field.goal.drag",
+      "area": "field",
+      "text": "按住拖动可调整顺序，也可用上下方向键移动",
+      "sort_order": 395
+    },
+    {
+      "key": "field.source.probability",
+      "area": "field",
+      "text": "参与概率",
+      "sort_order": 400
+    },
+    {
+      "key": "field.source.amount_low",
+      "area": "field",
+      "text": "金额下限",
+      "sort_order": 410
+    },
+    {
+      "key": "field.source.amount_high",
+      "area": "field",
+      "text": "金额上限",
+      "sort_order": 420
+    },
+    {
+      "key": "field.source.interrupt",
+      "area": "field",
+      "text": "中断概率",
+      "sort_order": 430
+    },
+    {
+      "key": "field.source.start_month",
+      "area": "field",
+      "text": "开始月份",
+      "sort_order": 440
+    },
+    {
+      "key": "field.source.end_month",
+      "area": "field",
+      "text": "结束月份",
+      "sort_order": 450
+    },
+    {
+      "key": "field.source.deterministic",
+      "area": "field",
+      "text": "确定性收入",
+      "sort_order": 460
+    },
+    {
+      "key": "button.load_archetype",
+      "area": "button",
+      "text": "加载画像",
+      "sort_order": 470
+    },
+    {
+      "key": "button.add_goal",
+      "area": "button",
+      "text": "添加目标",
+      "sort_order": 480
+    },
+    {
+      "key": "button.run",
+      "area": "button",
+      "text": "推　演",
+      "sort_order": 490
+    },
+    {
+      "key": "button.lookup",
+      "area": "button",
+      "text": "解释",
+      "sort_order": 500
+    },
+    {
+      "key": "button.delete_goal",
+      "area": "button",
+      "text": "删除该目标",
+      "sort_order": 510
+    },
+    {
+      "key": "verdict.hit_probability",
+      "area": "verdict",
+      "text": "目标达成概率",
+      "sort_order": 520
+    },
+    {
+      "key": "verdict.delay",
+      "area": "verdict",
+      "text": "当前预算下的预计延后",
+      "sort_order": 530
+    },
+    {
+      "key": "verdict.capacity",
+      "area": "verdict",
+      "text": "风险容量等级 ／ 权益类建议上限",
+      "sort_order": 540
+    },
+    {
+      "key": "verdict.pending",
+      "area": "verdict",
+      "text": "尚未推演",
+      "sort_order": 550
+    },
+    {
+      "key": "verdict.not_reached",
+      "area": "verdict",
+      "text": "未达成",
+      "sort_order": 560
+    },
+    {
+      "key": "verdict.keep_current",
+      "area": "verdict",
+      "text": "无需压缩",
+      "sort_order": 570
+    },
+    {
+      "key": "verdict.infeasible",
+      "area": "verdict",
+      "text": "不可行",
+      "sort_order": 580
+    },
+    {
+      "key": "chart.band.title",
+      "area": "chart",
+      "text": "现金流分位带",
+      "sort_order": 590
+    },
+    {
+      "key": "chart.band.caption",
+      "area": "chart",
+      "text": "八成可能的未来落在这一带，看中间那条线的终点",
+      "sort_order": 600
+    },
+    {
+      "key": "chart.band.legend.range",
+      "area": "chart",
+      "text": "10–90 分位区间",
+      "sort_order": 610
+    },
+    {
+      "key": "chart.band.legend.median",
+      "area": "chart",
+      "text": "中位路径",
+      "sort_order": 620
+    },
+    {
+      "key": "chart.goals.title",
+      "area": "chart",
+      "text": "目标达成概率",
+      "sort_order": 630
+    },
+    {
+      "key": "chart.goals.caption",
+      "area": "chart",
+      "text": "按优先级从上到下排列，条越长越可能按时达成，颜色越深概率越高",
+      "sort_order": 640
+    },
+    {
+      "key": "chart.goals.timing",
+      "area": "chart",
+      "text": "中位达成第 {n} 月",
+      "sort_order": 650
+    },
+    {
+      "key": "chart.goals.unreached",
+      "area": "chart",
+      "text": "推演期内半数路径未达成",
+      "sort_order": 660
+    },
+    {
+      "key": "chart.goals.label",
+      "area": "chart",
+      "text": "目标 {wan} 万 · 第 {due} 月到期 · ",
+      "sort_order": 670
+    },
+    {
+      "key": "chart.goals.scenario_title",
+      "area": "chart",
+      "text": "三档情景下的达成概率",
+      "sort_order": 680
+    },
+    {
+      "key": "chart.scenario.goal",
+      "area": "chart",
+      "text": "目标",
+      "sort_order": 682
+    },
+    {
+      "key": "chart.scenario.none",
+      "area": "chart",
+      "text": "—",
+      "sort_order": 684
+    },
+    {
+      "key": "chart.accounts.title",
+      "area": "chart",
+      "text": "四账户分配",
+      "sort_order": 690
+    },
+    {
+      "key": "chart.accounts.caption",
+      "area": "chart",
+      "text": "看最底层的厚度，最上面一层是当月剩下的钱，不是你计划要投的",
+      "sort_order": 700
+    },
+    {
+      "key": "chart.capacity.title",
+      "area": "chart",
+      "text": "风险容量日历",
+      "sort_order": 710
+    },
+    {
+      "key": "chart.capacity.caption",
+      "area": "chart",
+      "text": "看这条线有没有跌破虚线，跌破说明目标临期在压低承受能力",
+      "sort_order": 720
+    },
+    {
+      "key": "chart.capacity.legend.cushion",
+      "area": "chart",
+      "text": "安全垫厚度",
+      "sort_order": 730
+    },
+    {
+      "key": "chart.capacity.legend.target",
+      "area": "chart",
+      "text": "应急金目标线",
+      "sort_order": 740
+    },
+    {
+      "key": "chart.capacity.target",
+      "area": "chart",
+      "text": "应急金目标 {n} 个月",
+      "sort_order": 750
+    },
+    {
+      "key": "chart.axis.month",
+      "area": "chart",
+      "text": "第 {n} 月",
+      "sort_order": 760
+    },
+    {
+      "key": "plan.pick",
+      "area": "plan",
+      "text": "针对目标",
+      "sort_order": 770
+    },
+    {
+      "key": "plan.tag.pending",
+      "area": "plan",
+      "text": "待推演",
+      "sort_order": 780
+    },
+    {
+      "key": "plan.label.compress",
+      "area": "plan",
+      "text": "方案一",
+      "sort_order": 790
+    },
+    {
+      "key": "plan.label.postpone",
+      "area": "plan",
+      "text": "方案二",
+      "sort_order": 800
+    },
+    {
+      "key": "plan.tag.keep",
+      "area": "plan",
+      "text": "当前预算已达标",
+      "sort_order": 810
+    },
+    {
+      "key": "plan.tag.feasible",
+      "area": "plan",
+      "text": "存在可行解",
+      "sort_order": 820
+    },
+    {
+      "key": "plan.tag.infeasible",
+      "area": "plan",
+      "text": "无可行解",
+      "sort_order": 830
+    },
+    {
+      "key": "plan.empty",
+      "area": "plan",
+      "text": "推演后给出两个互斥方案。",
+      "sort_order": 840
+    },
+    {
+      "key": "term.placeholder",
+      "area": "term",
+      "text": "例如：最大回撤　波动率　七日年化",
+      "sort_order": 850
+    },
+    {
+      "key": "term.empty",
+      "area": "term",
+      "text": "输入一个术语，系统将给出三层解释。",
+      "sort_order": 860
+    },
+    {
+      "key": "term.layer1",
+      "area": "term",
+      "text": "通俗释义",
+      "sort_order": 870
+    },
+    {
+      "key": "term.layer2",
+      "area": "term",
+      "text": "成因说明",
+      "sort_order": 880
+    },
+    {
+      "key": "term.layer3",
+      "area": "term",
+      "text": "个人影响",
+      "sort_order": 890
+    },
+    {
+      "key": "term.linked_goal",
+      "area": "term",
+      "text": "关联目标",
+      "sort_order": 900
+    },
+    {
+      "key": "term.no_goal",
+      "area": "term",
+      "text": "暂无关联目标",
+      "sort_order": 910
+    },
+    {
+      "key": "term.source_prefix",
+      "area": "term",
+      "text": "依据语料",
+      "sort_order": 920
+    },
+    {
+      "key": "balance.available",
+      "area": "balance",
+      "text": "月度可用结余",
+      "sort_order": 930
+    },
+    {
+      "key": "balance.need",
+      "area": "balance",
+      "text": "月均刚需",
+      "sort_order": 940
+    },
+    {
+      "key": "balance.income",
+      "area": "balance",
+      "text": "月均预期收入",
+      "sort_order": 950
+    },
+    {
+      "key": "balance.emergency",
+      "area": "balance",
+      "text": "应急金目标",
+      "sort_order": 960
+    },
+    {
+      "key": "balance.note",
+      "area": "balance",
+      "text": "预期值按各类收入的期望计算，实际结果由仿真给出",
+      "sort_order": 970
+    },
+    {
+      "key": "balance.negative",
+      "area": "balance",
+      "text": "收支为负，账户将出现断流，请调整预算或目标",
+      "sort_order": 980
+    },
+    {
+      "key": "unit.yuan",
+      "area": "unit",
+      "text": "元",
+      "sort_order": 990
+    },
+    {
+      "key": "unit.wan",
+      "area": "unit",
+      "text": "万元",
+      "sort_order": 1000
+    },
+    {
+      "key": "unit.month",
+      "area": "unit",
+      "text": "个月",
+      "sort_order": 1010
+    },
+    {
+      "key": "unit.per_month",
+      "area": "unit",
+      "text": "元／月",
+      "sort_order": 1020
+    },
+    {
+      "key": "unit.percent",
+      "area": "unit",
+      "text": "%",
+      "sort_order": 1030
+    },
+    {
+      "key": "unit.path",
+      "area": "unit",
+      "text": "条",
+      "sort_order": 1035
+    },
+    {
+      "key": "chart.paths.title",
+      "area": "chart",
+      "text": "每一条路径长什么样",
+      "sort_order": 1781
+    },
+    {
+      "key": "chart.paths.caption",
+      "area": "chart",
+      "text": "一条细线就是一次完整的随机推演，按最后兜里的钱从少到多抽出",
+      "sort_order": 1782
+    },
+    {
+      "key": "chart.paths.legend.sample",
+      "area": "chart",
+      "text": "单条路径（抽 {n} 条，共 {total} 条）",
+      "sort_order": 1783
+    },
+    {
+      "key": "chart.paths.legend.median",
+      "area": "chart",
+      "text": "中位路径",
+      "sort_order": 1784
+    },
+    {
+      "key": "chart.paths.grounded",
+      "area": "chart",
+      "text": "样本中有 {n} 条路径在某个月份被花到见底，细线会贴着底线走一段",
+      "sort_order": 1785
+    },
+    {
+      "key": "chart.hist.title",
+      "area": "chart",
+      "text": "最后兜里有多少钱的分布",
+      "sort_order": 1786
+    },
+    {
+      "key": "chart.hist.caption",
+      "area": "chart",
+      "text": "全部路径按期末余额分格计数，柱子越高说明落在这段区间的路径越多",
+      "sort_order": 1787
+    },
+    {
+      "key": "chart.hist.median",
+      "area": "chart",
+      "text": "中位 {wan} 万元",
+      "sort_order": 1788
+    },
+    {
+      "key": "chart.reach.title",
+      "area": "chart",
+      "text": "达成概率是怎么攒出来的",
+      "sort_order": 1789
+    },
+    {
+      "key": "chart.reach.caption",
+      "area": "chart",
+      "text": "按月累计：到第几个月为止已经攒够的路径占比",
+      "sort_order": 1790
+    },
+    {
+      "key": "chart.reach.dot_note",
+      "area": "chart",
+      "text": "曲线上的圆点是该目标的到期月，它的高度就是那张卡上的达成概率",
+      "sort_order": 1791
+    },
+    {
+      "key": "chart.reach.legend.goal",
+      "area": "chart",
+      "text": "{name}　到期第 {due} 月",
+      "sort_order": 1792
+    },
+    {
+      "key": "term.agent.title",
+      "area": "term",
+      "text": "生成过程",
+      "sort_order": 90
+    },
+    {
+      "key": "term.agent.provider",
+      "area": "term",
+      "text": "生成方式",
+      "sort_order": 91
+    },
+    {
+      "key": "term.agent.provider.rule",
+      "area": "term",
+      "text": "本地规则",
+      "sort_order": 92
+    },
+    {
+      "key": "term.agent.provider.model",
+      "area": "term",
+      "text": "外部模型",
+      "sort_order": 93
+    },
+    {
+      "key": "term.agent.steps",
+      "area": "term",
+      "text": "执行步骤",
+      "sort_order": 94
+    },
+    {
+      "key": "term.agent.no_source",
+      "area": "term",
+      "text": "该说法暂未关联语料",
+      "sort_order": 96
+    },
+    {
+      "key": "term.agent.trace_off",
+      "area": "term",
+      "text": "本次未记录执行轨迹",
+      "sort_order": 98
+    },
+    {
+      "key": "insight.title",
+      "area": "insight",
+      "text": "结论解读",
+      "sort_order": 10
+    },
+    {
+      "key": "insight.caption",
+      "area": "insight",
+      "text": "把推演出的数字转写成可执行的做法与代价",
+      "sort_order": 11
+    },
+    {
+      "key": "insight.run",
+      "area": "insight",
+      "text": "生成解读",
+      "sort_order": 12
+    },
+    {
+      "key": "insight.empty",
+      "area": "insight",
+      "text": "完成一次推演后，这里会给出结论解读",
+      "sort_order": 13
+    },
+    {
+      "key": "insight.goal_summary",
+      "area": "insight",
+      "text": "本次推演纳入 {n} 个目标",
+      "sort_order": 18
+    },
+    {
+      "key": "insight.goal_gap",
+      "area": "insight",
+      "text": "还差 {amount}",
+      "sort_order": 19
+    },
+    {
+      "key": "insight.unavailable",
+      "area": "insight",
+      "text": "解读这次没能生成，上面的数字是推演直接给出的结果",
+      "sort_order": 20
+    },
+    {
+      "key": "insight.headline",
+      "area": "insight",
+      "text": "当前处境",
+      "sort_order": 14
+    },
+    {
+      "key": "insight.points",
+      "area": "insight",
+      "text": "可选做法与代价",
+      "sort_order": 15
+    },
+    {
+      "key": "insight.risk",
+      "area": "insight",
+      "text": "最脆弱环节",
+      "sort_order": 16
+    },
+    {
+      "key": "insight.provider",
+      "area": "insight",
+      "text": "生成方式",
+      "sort_order": 17
+    },
+    {
+      "key": "verdict.deficit",
+      "area": "verdict",
+      "text": "断流风险",
+      "sort_order": 30
+    },
+    {
+      "key": "verdict.deficit_sample",
+      "area": "verdict",
+      "text": "代表性断流月份",
+      "sort_order": 31
+    },
+    {
+      "key": "goal.gap",
+      "area": "field",
+      "text": "目标缺口",
+      "sort_order": 40
+    },
+    {
+      "key": "status.loading",
+      "area": "status",
+      "text": "正在加载配置…",
+      "sort_order": 900
+    },
+    {
+      "key": "verdict.deficit_detail",
+      "area": "verdict",
+      "text": "共 {count} 个月次出现余额不足，涉及 {paths} 条路径",
+      "sort_order": 32
+    },
+    {
+      "key": "goal.covered",
+      "area": "field",
+      "text": "已覆盖",
+      "sort_order": 42
+    },
+    {
+      "key": "plan.cache_hit",
+      "area": "plan",
+      "text": "随机路径命中缓存，结果与上次一致",
+      "sort_order": 60
+    },
+    {
+      "key": "plan.title.compress_keep",
+      "area": "plan",
+      "text": "当前预算已达标，无需压缩",
+      "sort_order": 20
+    },
+    {
+      "key": "plan.title.compress_feasible",
+      "area": "plan",
+      "text": "压缩体验悦己预算，按期达成",
+      "sort_order": 21
+    },
+    {
+      "key": "plan.title.compress_infeasible",
+      "area": "plan",
+      "text": "压缩体验悦己预算仍无法按期达成",
+      "sort_order": 22
+    },
+    {
+      "key": "plan.title.postpone",
+      "area": "plan",
+      "text": "保持体验悦己预算，目标顺延",
+      "sort_order": 23
+    },
+    {
+      "key": "plan.message.compress_keep",
+      "area": "plan",
+      "text": "当前预算下按期达成概率已高于目标线，无需压缩",
+      "sort_order": 30
+    },
+    {
+      "key": "plan.message.compress_feasible",
+      "area": "plan",
+      "text": "在保证按期达成的条件下，体验悦己预算可保留的上限",
+      "sort_order": 31
+    },
+    {
+      "key": "plan.message.compress_infeasible",
+      "area": "plan",
+      "text": "即便把体验悦己预算压到零元，也达不到目标线",
+      "sort_order": 32
+    },
+    {
+      "key": "plan.message.compress_zero",
+      "area": "plan",
+      "text": "体验悦己预算已为零，没有可压缩空间",
+      "sort_order": 33
+    },
+    {
+      "key": "fmt.month_ordinal",
+      "area": "unit",
+      "text": "第 {n} 月",
+      "sort_order": 60
+    },
+    {
+      "key": "section.expense",
+      "area": "section",
+      "text": "每月支出",
+      "sort_order": 30
+    },
+    {
+      "key": "section.expense.note",
+      "area": "section",
+      "text": "逐项配置每月实际花掉的钱；刚需不可压缩，弹性可以调整",
+      "sort_order": 31
+    },
+    {
+      "key": "field.expense.amount",
+      "area": "field",
+      "text": "月额",
+      "sort_order": 70
+    },
+    {
+      "key": "field.expense.essential",
+      "area": "field",
+      "text": "刚需",
+      "sort_order": 71
+    },
+    {
+      "key": "field.expense.discretionary",
+      "area": "field",
+      "text": "弹性",
+      "sort_order": 72
+    },
+    {
+      "key": "field.expense.growth",
+      "area": "field",
+      "text": "年增长",
+      "sort_order": 73
+    },
+    {
+      "key": "section.assumptions",
+      "area": "section",
+      "text": "假设参数",
+      "sort_order": 40
+    },
+    {
+      "key": "section.assumptions.note",
+      "area": "section",
+      "text": "这些概率与增长率是推演的基础假设，修改后立即生效",
+      "sort_order": 41
+    },
+    {
+      "key": "archetype.group_builtin",
+      "area": "archetype",
+      "text": "财务画像",
+      "sort_order": 10
+    },
+    {
+      "key": "archetype.group_saved",
+      "area": "archetype",
+      "text": "我的档案",
+      "sort_order": 20
+    },
+    {
+      "key": "archetype.saved",
+      "area": "archetype",
+      "text": "已保存为我的档案",
+      "sort_order": 30
+    },
+    {
+      "key": "archetype.deleted",
+      "area": "archetype",
+      "text": "档案已删除",
+      "sort_order": 40
+    },
+    {
+      "key": "field.profile_name",
+      "area": "field",
+      "text": "档案名称",
+      "sort_order": 90
+    },
+    {
+      "key": "button.save_profile",
+      "area": "button",
+      "text": "保存档案",
+      "sort_order": 60
+    },
+    {
+      "key": "button.delete_profile",
+      "area": "button",
+      "text": "删除",
+      "sort_order": 70
+    },
+    {
+      "key": "position.for_who",
+      "area": "position",
+      "text": "对谁",
+      "sort_order": 1040
+    },
+    {
+      "key": "position.what",
+      "area": "position",
+      "text": "做什么",
+      "sort_order": 1050
+    },
+    {
+      "key": "position.not",
+      "area": "position",
+      "text": "不做什么",
+      "sort_order": 1060
+    },
+    {
+      "key": "position.edit",
+      "area": "position",
+      "text": "转到我的情况",
+      "sort_order": 1070
+    },
+    {
+      "key": "position.v.for_who",
+      "area": "position",
+      "text": "收入不稳定、近三年有一笔明确要攒的钱、又说不清每月能安全花多少的年轻人",
+      "sort_order": 1080
+    },
+    {
+      "key": "position.v.what",
+      "area": "position",
+      "text": "把「这笔钱花不花」换算成「那个目标会晚多久」，再把两个都说得通的取舍摆出来",
+      "sort_order": 1090
+    },
+    {
+      "key": "position.v.not",
+      "area": "position",
+      "text": "不记账、不交易、不推荐产品、不预测收益、不做风险测评",
+      "sort_order": 1100
+    },
+    {
+      "key": "howto.toggle",
+      "area": "howto",
+      "text": "这次推演是怎么算出来的",
+      "sort_order": 1110
+    },
+    {
+      "key": "howto.step1.t",
+      "area": "howto",
+      "text": "造出很多种未来",
+      "sort_order": 1120
+    },
+    {
+      "key": "howto.step1.d",
+      "area": "howto",
+      "text": "按你填的收入来源与突发支出频率，随机生成一批各不相同的收入与意外支出路径",
+      "sort_order": 1130
+    },
+    {
+      "key": "howto.step2.t",
+      "area": "howto",
+      "text": "逐月滚余额",
+      "sort_order": 1140
+    },
+    {
+      "key": "howto.step2.d",
+      "area": "howto",
+      "text": "每月余额等于上月余额加当月净收支，跌破零就记一次断流并归零",
+      "sort_order": 1150
+    },
+    {
+      "key": "howto.step3.t",
+      "area": "howto",
+      "text": "数达成",
+      "sort_order": 1160
+    },
+    {
+      "key": "howto.step3.d",
+      "area": "howto",
+      "text": "在每条路径上找第一次攒够的月份，看它是否早于你要的月份",
+      "sort_order": 1170
+    },
+    {
+      "key": "howto.step4.t",
+      "area": "howto",
+      "text": "按优先级分四层放钱",
+      "sort_order": 1180
+    },
+    {
+      "key": "howto.step4.d",
+      "area": "howto",
+      "text": "先填满安全底座，再成长悦己、体验悦己，剩下的才进长期复利",
+      "sort_order": 1190
+    },
+    {
+      "key": "howto.step5.t",
+      "area": "howto",
+      "text": "定容量",
+      "sort_order": 1200
+    },
+    {
+      "key": "howto.step5.d",
+      "area": "howto",
+      "text": "按安全垫厚度与临近目标的压力定出当月风险容量，取客观测算与主观偏好中更严的那个",
+      "sort_order": 1210
+    },
+    {
+      "key": "assume.title",
+      "area": "assume",
+      "text": "这些数字是哪来的",
+      "sort_order": 1300
+    },
+    {
+      "key": "assume.note",
+      "area": "assume",
+      "text": "每个参数都标了性质与来源。假设类的结论请当作参考，不要当作事实",
+      "sort_order": 1310
+    },
+    {
+      "key": "assume.legend.measured",
+      "area": "assume",
+      "text": "实测",
+      "sort_order": 1320
+    },
+    {
+      "key": "assume.legend.assumed",
+      "area": "assume",
+      "text": "假设",
+      "sort_order": 1330
+    },
+    {
+      "key": "assume.legend.conventional",
+      "area": "assume",
+      "text": "惯例",
+      "sort_order": 1340
+    },
+    {
+      "key": "assume.count",
+      "area": "assume",
+      "text": "共 {n} 项参数",
+      "sort_order": 1350
+    },
+    {
+      "key": "assume.property",
+      "area": "assume",
+      "text": "性质",
+      "sort_order": 1360
+    },
+    {
+      "key": "assume.period",
+      "area": "assume",
+      "text": "统计期间",
+      "sort_order": 1370
+    },
+    {
+      "key": "assume.range",
+      "area": "assume",
+      "text": "三档取值",
+      "sort_order": 1380
+    },
+    {
+      "key": "assume.edit",
+      "area": "assume",
+      "text": "修改",
+      "sort_order": 1390
+    },
+    {
+      "key": "assume.save",
+      "area": "assume",
+      "text": "保存并重算",
+      "sort_order": 1400
+    },
+    {
+      "key": "assume.saved",
+      "area": "assume",
+      "text": "已保存，推演结果已按新参数重算",
+      "sort_order": 1410
+    },
+    {
+      "key": "assume.empty",
+      "area": "assume",
+      "text": "参数表为空，请检查数据库种子",
+      "sort_order": 1420
+    },
+    {
+      "key": "assume.source_missing",
+      "area": "assume",
+      "text": "未登记来源",
+      "sort_order": 1430
+    },
+    {
+      "key": "whatif.title",
+      "area": "whatif",
+      "text": "如果换个假设会怎样",
+      "sort_order": 1440
+    },
+    {
+      "key": "whatif.note",
+      "area": "whatif",
+      "text": "把每项参数推到高低两端重跑一遍，看谁真正左右结果",
+      "sort_order": 1450
+    },
+    {
+      "key": "whatif.run",
+      "area": "whatif",
+      "text": "跑一遍",
+      "sort_order": 1460
+    },
+    {
+      "key": "whatif.empty",
+      "area": "whatif",
+      "text": "点右侧按钮，看看哪些假设值得争论",
+      "sort_order": 1470
+    },
+    {
+      "key": "whatif.rank",
+      "area": "whatif",
+      "text": "按影响大小排序",
+      "sort_order": 1480
+    },
+    {
+      "key": "whatif.lead",
+      "area": "whatif",
+      "text": "排在最前面的参数，就是下一步最该去核实的事",
+      "sort_order": 1490
+    },
+    {
+      "key": "whatif.base",
+      "area": "whatif",
+      "text": "基准达成概率",
+      "sort_order": 1500
+    },
+    {
+      "key": "whatif.swing",
+      "area": "whatif",
+      "text": "影响幅度",
+      "sort_order": 1510
+    },
+    {
+      "key": "whatif.reused",
+      "area": "whatif",
+      "text": "复用了同一批随机路径，结果可复现",
+      "sort_order": 1520
+    },
+    {
+      "key": "whatif.fail",
+      "area": "whatif",
+      "text": "这次没能算出来，请稍后重试",
+      "sort_order": 1530
+    },
+    {
+      "key": "explain.loading",
+      "area": "explain",
+      "text": "正在解释…",
+      "sort_order": 1540
+    },
+    {
+      "key": "explain.fail",
+      "area": "explain",
+      "text": "这个词暂时解释不了，请稍后重试",
+      "sort_order": 1550
+    },
+    {
+      "key": "explain.missing",
+      "area": "explain",
+      "text": "「{term}」这个说法还没收进词条库",
+      "sort_order": 1552
+    },
+    {
+      "key": "explain.missing_note",
+      "area": "explain",
+      "text": "结论里带虚线下划线的词都可以点开。下面是已经收录的词条，点任意一个先看：",
+      "sort_order": 1554
+    },
+    {
+      "key": "explain.suggest",
+      "area": "explain",
+      "text": "已收录的词条",
+      "sort_order": 1556
+    },
+    {
+      "key": "verdict.hit_note",
+      "area": "verdict",
+      "text": "一百种可能的未来里，{n} 种能按时攒够「{goal}」",
+      "sort_order": 1560
+    },
+    {
+      "key": "verdict.delay_note",
+      "area": "verdict",
+      "text": "大约第 {median} 个月才够，比你要的第 {due} 个月晚 {delay} 个月",
+      "sort_order": 1570
+    },
+    {
+      "key": "verdict.delay_none",
+      "area": "verdict",
+      "text": "大约第 {median} 个月攒够，赶得上你要的时间",
+      "sort_order": 1580
+    },
+    {
+      "key": "verdict.capacity_note",
+      "area": "verdict",
+      "text": "不进账也能撑 {cushion} 个月，允许长期资金最多 {cap}% 放进会波动的资产",
+      "sort_order": 1590
+    },
+    {
+      "key": "verdict.footnote",
+      "area": "verdict",
+      "text": "{paths} 条随机路径 · 推演 {months} {monthUnit} · 期末中位余额 {balance} · 断流 {deficitMonths} 个月次／{deficitPaths} 条路径 · 随机种子 {seed}",
+      "sort_order": 1610
+    },
+    {
+      "key": "chart.note",
+      "area": "chart",
+      "text": "{paths} 条路径 · 推演 {months} {monthUnit} · 种子 {seed}",
+      "sort_order": 1620
+    },
+    {
+      "key": "plan.delta_less",
+      "area": "plan",
+      "text": "体验悦己预算每月少花 {amount} {unit}",
+      "sort_order": 1640
+    },
+    {
+      "key": "plan.delta_more",
+      "area": "plan",
+      "text": "体验悦己预算每月多花 {amount} {unit}",
+      "sort_order": 1650
+    },
+    {
+      "key": "plan.prob_range",
+      "area": "plan",
+      "text": "{goal}　达成概率 {from}{unit} → {to}{unit}",
+      "sort_order": 1660
+    },
+    {
+      "key": "plan.delay_prefix",
+      "area": "plan",
+      "text": "至少",
+      "sort_order": 1670
+    },
+    {
+      "key": "plan.p2_note",
+      "area": "plan",
+      "text": "维持体验悦己预算 {amount} {unit}，代价是这个目标延后 {delay} {monthUnit}",
+      "sort_order": 1680
+    },
+    {
+      "key": "plan.p2_note_at_least",
+      "area": "plan",
+      "text": "维持体验悦己预算 {amount} {unit}，代价是这个目标至少延后 {delay} {monthUnit}",
+      "sort_order": 1681
+    },
+    {
+      "key": "explain.elapsed",
+      "area": "explain",
+      "text": "耗时 {seconds} 秒",
+      "sort_order": 1690
+    },
+    {
+      "key": "explain.trace",
+      "area": "explain",
+      "text": "这段解释是怎么来的",
+      "sort_order": 1700
+    },
+    {
+      "key": "explain.degraded",
+      "area": "explain",
+      "text": "外部模型不可用，已降级",
+      "sort_order": 1710
+    },
+    {
+      "key": "explain.by_agent",
+      "area": "explain",
+      "text": "由「{agent}」生成",
+      "sort_order": 1720
+    },
+    {
+      "key": "whatif.swing_def",
+      "area": "whatif",
+      "text": "达成概率相差 {value} 个百分点",
+      "sort_order": 1730
+    },
+    {
+      "key": "whatif.param_range",
+      "area": "whatif",
+      "text": "参数取值",
+      "sort_order": 1740
+    },
+    {
+      "key": "whatif.prob_range",
+      "area": "whatif",
+      "text": "达成概率",
+      "sort_order": 1750
+    },
+    {
+      "key": "whatif.reused_note",
+      "area": "whatif",
+      "text": "两档之间看到的差别只来自这个参数本身，不是随机噪声",
+      "sort_order": 1760
+    },
+    {
+      "key": "chart.capacity.range_note",
+      "area": "chart",
+      "text": "本图只展示前 24 个月，右侧更远的变化不在这张图里",
+      "sort_order": 1770
+    },
+    {
+      "key": "assume.rate_hint",
+      "area": "assume",
+      "text": "填 3 表示 3%，不要填 0.03",
+      "sort_order": 1780
+    },
+    {
+      "key": "field.months.hint",
+      "area": "field",
+      "text": "取值 12 到 120，决定能看到多远的未来；目标的到期月份不能大于它",
+      "sort_order": 1790
+    },
+    {
+      "key": "field.living_mirror",
+      "area": "field",
+      "text": "与「基础信息」里的家庭支持是同一个数字，两边改哪一边都一样",
+      "sort_order": 1800
+    },
+    {
+      "key": "section.settings",
+      "area": "section",
+      "text": "智能体接口",
+      "sort_order": 1850
+    },
+    {
+      "key": "section.settings.note",
+      "area": "section",
+      "text": "解释文字可以由本地规则生成，也可以调用你自己的模型服务",
+      "sort_order": 1852
+    },
+    {
+      "key": "settings.local_only",
+      "area": "settings",
+      "text": "本产品只在你本机运行。是否调用外部模型、调用哪个地址，完全由你决定；不填就一直走本地规则，功能不受影响",
+      "sort_order": 1854
+    },
+    {
+      "key": "settings.key_note",
+      "area": "settings",
+      "text": "凭据只写进本机目录下的 .env.local，不写入数据库，也不随任何导出记录带走",
+      "sort_order": 1856
+    },
+    {
+      "key": "field.provider",
+      "area": "field",
+      "text": "生成方式",
+      "sort_order": 1860
+    },
+    {
+      "key": "field.provider.hint",
+      "area": "field",
+      "text": "本地规则不产生任何网络请求；外部模型需要填下面的地址与模型名",
+      "sort_order": 1861
+    },
+    {
+      "key": "field.provider.rule",
+      "area": "field",
+      "text": "本地规则（离线可用）",
+      "sort_order": 1862
+    },
+    {
+      "key": "field.provider.model",
+      "area": "field",
+      "text": "外部模型（OpenAI 兼容接口）",
+      "sort_order": 1863
+    },
+    {
+      "key": "field.base_url",
+      "area": "field",
+      "text": "接口地址",
+      "sort_order": 1864
+    },
+    {
+      "key": "field.base_url.hint",
+      "area": "field",
+      "text": "形如 https://api.example.com/v1，系统会自动补上对话补全的路径",
+      "sort_order": 1865
+    },
+    {
+      "key": "field.base_url.placeholder",
+      "area": "field",
+      "text": "https://api.example.com/v1",
+      "sort_order": 1866
+    },
+    {
+      "key": "field.model",
+      "area": "field",
+      "text": "模型名称",
+      "sort_order": 1867
+    },
+    {
+      "key": "field.model.hint",
+      "area": "field",
+      "text": "填服务商给出的模型标识，区分大小写",
+      "sort_order": 1868
+    },
+    {
+      "key": "field.api_key",
+      "area": "field",
+      "text": "接口凭据",
+      "sort_order": 1869
+    },
+    {
+      "key": "field.api_key.hint",
+      "area": "field",
+      "text": "留空则不改动现有凭据；要覆盖就在下面重新填一次",
+      "sort_order": 1870
+    },
+    {
+      "key": "field.api_key.placeholder",
+      "area": "field",
+      "text": "留空则不改动",
+      "sort_order": 1871
+    },
+    {
+      "key": "field.allow_network",
+      "area": "field",
+      "text": "允许联网调用",
+      "sort_order": 1872
+    },
+    {
+      "key": "field.allow_network.hint",
+      "area": "field",
+      "text": "关闭后即使选择了外部模型也不会发出网络请求",
+      "sort_order": 1873
+    },
+    {
+      "key": "field.temperature",
+      "area": "field",
+      "text": "生成温度",
+      "sort_order": 1874
+    },
+    {
+      "key": "field.temperature.hint",
+      "area": "field",
+      "text": "取 0 到 2，数值越低输出越稳定",
+      "sort_order": 1875
+    },
+    {
+      "key": "field.max_tokens",
+      "area": "field",
+      "text": "单次最大长度",
+      "sort_order": 1876
+    },
+    {
+      "key": "field.max_tokens.hint",
+      "area": "field",
+      "text": "按词元计，上限取决于你使用的模型",
+      "sort_order": 1877
+    },
+    {
+      "key": "field.timeout",
+      "area": "field",
+      "text": "超时秒数",
+      "sort_order": 1878
+    },
+    {
+      "key": "field.timeout.hint",
+      "area": "field",
+      "text": "超时即视为调用失败，并回落到本地规则",
+      "sort_order": 1879
+    },
+    {
+      "key": "button.agent_save",
+      "area": "button",
+      "text": "保存配置",
+      "sort_order": 1880
+    },
+    {
+      "key": "button.agent_test",
+      "area": "button",
+      "text": "测试连接",
+      "sort_order": 1881
+    },
+    {
+      "key": "settings.test.pass",
+      "area": "settings",
+      "text": "连接正常，用时 {ms} 毫秒",
+      "sort_order": 1884
+    },
+    {
+      "key": "settings.test.fail",
+      "area": "settings",
+      "text": "未能连接：{reason}",
+      "sort_order": 1885
+    },
+    {
+      "key": "settings.status.line",
+      "area": "settings",
+      "text": "当前生成方式：{provider}　凭据：{key}　联网：{network}",
+      "sort_order": 1886
+    },
+    {
+      "key": "settings.status.rule",
+      "area": "settings",
+      "text": "本地规则",
+      "sort_order": 1887
+    },
+    {
+      "key": "settings.status.model",
+      "area": "settings",
+      "text": "外部模型",
+      "sort_order": 1888
+    },
+    {
+      "key": "settings.status.yes",
+      "area": "settings",
+      "text": "已允许",
+      "sort_order": 1889
+    },
+    {
+      "key": "settings.status.no",
+      "area": "settings",
+      "text": "未允许",
+      "sort_order": 1890
+    },
+    {
+      "key": "settings.status.set",
+      "area": "settings",
+      "text": "已保存",
+      "sort_order": 1891
+    },
+    {
+      "key": "settings.status.unset",
+      "area": "settings",
+      "text": "未保存",
+      "sort_order": 1892
+    },
+    {
+      "key": "whatif.pick",
+      "area": "whatif",
+      "text": "看哪个目标",
+      "sort_order": 1900
+    },
+    {
+      "key": "verdict.hit_others",
+      "area": "verdict",
+      "text": "其余目标：{goals}",
+      "sort_order": 1910
+    },
+    {
+      "key": "term.other_goals",
+      "area": "term",
+      "text": "另有 {n} 个目标一并纳入",
+      "sort_order": 1920
+    }
+  ]
+}

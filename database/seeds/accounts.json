@@ -1,0 +1,36 @@
+{
+  "accounts": [
+    {
+      "code": "safe",
+      "name": "安全底座",
+      "description": "应急备用金，覆盖若干个月的刚需支出",
+      "color": "#7A1014",
+      "priority": 1,
+      "sort_order": 10
+    },
+    {
+      "code": "growth",
+      "name": "成长悦己",
+      "description": "能够提升未来收入能力的支出",
+      "color": "#C0392B",
+      "priority": 2,
+      "sort_order": 20
+    },
+    {
+      "code": "treat",
+      "name": "体验悦己",
+      "description": "纯情绪价值的支出",
+      "color": "#C99A5B",
+      "priority": 3,
+      "sort_order": 30
+    },
+    {
+      "code": "compound",
+      "name": "长期复利",
+      "description": "长期财富积累",
+      "color": "#2E4A43",
+      "priority": 4,
+      "sort_order": 40
+    }
+  ]
+}

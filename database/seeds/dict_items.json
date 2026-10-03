@@ -1,0 +1,662 @@
+{
+  "dict_items": [
+    {
+      "type_code": "income_source",
+      "code": "living",
+      "name": "家庭支持",
+      "sort_order": 10,
+      "attributes": {
+        "distribution": "fixed",
+        "has_probability": false,
+        "has_interrupt": false,
+        "has_window": false,
+        "has_amount_range": true,
+        "note": "父母或其他来源每月给予的固定收入"
+      },
+      "short_name": "家庭"
+    },
+    {
+      "type_code": "income_source",
+      "code": "part_time",
+      "name": "兼职",
+      "sort_order": 20,
+      "attributes": {
+        "distribution": "monthly_random",
+        "has_probability": true,
+        "has_interrupt": true,
+        "has_window": false,
+        "has_amount_range": true
+      }
+    },
+    {
+      "type_code": "income_source",
+      "code": "scholarship",
+      "name": "奖学金",
+      "sort_order": 30,
+      "attributes": {
+        "distribution": "annual_lump",
+        "has_probability": true,
+        "has_interrupt": false,
+        "has_window": false,
+        "has_amount_range": true
+      }
+    },
+    {
+      "type_code": "income_source",
+      "code": "internship",
+      "name": "实习",
+      "sort_order": 40,
+      "attributes": {
+        "distribution": "segmented",
+        "has_probability": false,
+        "has_interrupt": true,
+        "has_window": true,
+        "has_amount_range": true
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "g1",
+      "name": "大一",
+      "sort_order": 10,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "g2",
+      "name": "大二",
+      "sort_order": 20,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "g3",
+      "name": "大三",
+      "sort_order": 30,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ],
+          "internship": [
+            1,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "g4",
+      "name": "大四",
+      "sort_order": 40,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ],
+          "internship": [
+            1,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "m1",
+      "name": "研一",
+      "sort_order": 50,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ],
+          "internship": [
+            1,
+            24
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "m2",
+      "name": "研二",
+      "sort_order": 60,
+      "attributes": {
+        "income_windows": {
+          "part_time": [
+            1,
+            120
+          ],
+          "internship": [
+            1,
+            24
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "m3",
+      "name": "研三",
+      "sort_order": 70,
+      "attributes": {
+        "income_windows": {
+          "internship": [
+            1,
+            36
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "risk_appetite",
+      "code": "low",
+      "name": "低",
+      "sort_order": 10,
+      "attributes": {
+        "cap": 0.2
+      }
+    },
+    {
+      "type_code": "risk_appetite",
+      "code": "medium",
+      "name": "中",
+      "sort_order": 20,
+      "attributes": {
+        "cap": 0.4
+      }
+    },
+    {
+      "type_code": "risk_appetite",
+      "code": "high",
+      "name": "高",
+      "sort_order": 30,
+      "attributes": {
+        "cap": 0.6
+      }
+    },
+    {
+      "type_code": "plan_type",
+      "code": "compress",
+      "name": "压缩预算按期达成",
+      "sort_order": 10
+    },
+    {
+      "type_code": "plan_type",
+      "code": "postpone",
+      "name": "保持预算目标顺延",
+      "sort_order": 20
+    },
+    {
+      "type_code": "param_property",
+      "code": "measured",
+      "name": "实测",
+      "sort_order": 10,
+      "attributes": {
+        "requires_tiers": false,
+        "tone": "measured"
+      }
+    },
+    {
+      "type_code": "param_property",
+      "code": "assumed",
+      "name": "假设",
+      "sort_order": 20,
+      "attributes": {
+        "requires_tiers": true,
+        "tone": "assumed"
+      }
+    },
+    {
+      "type_code": "param_property",
+      "code": "conventional",
+      "name": "惯例",
+      "sort_order": 30,
+      "attributes": {
+        "requires_tiers": true,
+        "tone": "assumed"
+      }
+    },
+    {
+      "type_code": "corpus_type",
+      "code": "product_spec",
+      "name": "产品说明书",
+      "sort_order": 10
+    },
+    {
+      "type_code": "corpus_type",
+      "code": "risk_disclosure",
+      "name": "风险揭示书",
+      "sort_order": 20
+    },
+    {
+      "type_code": "corpus_type",
+      "code": "regulation",
+      "name": "监管话术",
+      "sort_order": 30
+    },
+    {
+      "type_code": "scenario",
+      "code": "pessimistic",
+      "name": "悲观档",
+      "sort_order": 10
+    },
+    {
+      "type_code": "scenario",
+      "code": "base",
+      "name": "基准档",
+      "sort_order": 20
+    },
+    {
+      "type_code": "scenario",
+      "code": "optimistic",
+      "name": "乐观档",
+      "sort_order": 30
+    },
+    {
+      "type_code": "message_category",
+      "code": "disclaimer",
+      "name": "免责提示",
+      "sort_order": 10
+    },
+    {
+      "type_code": "message_category",
+      "code": "notice",
+      "name": "提示标签",
+      "sort_order": 20
+    },
+    {
+      "type_code": "message_category",
+      "code": "validation",
+      "name": "输入提示",
+      "sort_order": 30
+    },
+    {
+      "type_code": "message_category",
+      "code": "status",
+      "name": "状态提示",
+      "sort_order": 40
+    },
+    {
+      "type_code": "ui_area",
+      "code": "app",
+      "name": "产品标识",
+      "sort_order": 10
+    },
+    {
+      "type_code": "ui_area",
+      "code": "tab",
+      "name": "页签",
+      "sort_order": 20
+    },
+    {
+      "type_code": "ui_area",
+      "code": "section",
+      "name": "区块标题",
+      "sort_order": 30
+    },
+    {
+      "type_code": "ui_area",
+      "code": "field",
+      "name": "字段标签",
+      "sort_order": 40
+    },
+    {
+      "type_code": "ui_area",
+      "code": "button",
+      "name": "按钮",
+      "sort_order": 50
+    },
+    {
+      "type_code": "ui_area",
+      "code": "verdict",
+      "name": "结论层",
+      "sort_order": 60
+    },
+    {
+      "type_code": "ui_area",
+      "code": "chart",
+      "name": "图表",
+      "sort_order": 70
+    },
+    {
+      "type_code": "ui_area",
+      "code": "plan",
+      "name": "方案",
+      "sort_order": 80
+    },
+    {
+      "type_code": "ui_area",
+      "code": "term",
+      "name": "术语",
+      "sort_order": 90
+    },
+    {
+      "type_code": "ui_area",
+      "code": "balance",
+      "name": "结余条",
+      "sort_order": 100
+    },
+    {
+      "type_code": "ui_area",
+      "code": "status",
+      "name": "状态",
+      "sort_order": 110
+    },
+    {
+      "type_code": "ui_area",
+      "code": "unit",
+      "name": "单位",
+      "sort_order": 120
+    },
+    {
+      "type_code": "setting_group",
+      "code": "simulation",
+      "name": "仿真",
+      "sort_order": 10
+    },
+    {
+      "type_code": "setting_group",
+      "code": "limits",
+      "name": "上限",
+      "sort_order": 20
+    },
+    {
+      "type_code": "setting_group",
+      "code": "solver",
+      "name": "求解器",
+      "sort_order": 30
+    },
+    {
+      "type_code": "setting_group",
+      "code": "capacity",
+      "name": "风险容量",
+      "sort_order": 40
+    },
+    {
+      "type_code": "setting_group",
+      "code": "scoring",
+      "name": "评分",
+      "sort_order": 50
+    },
+    {
+      "type_code": "setting_group",
+      "code": "scenario",
+      "name": "情景系数",
+      "sort_order": 60
+    },
+    {
+      "type_code": "setting_group",
+      "code": "explain",
+      "name": "术语解释",
+      "sort_order": 70
+    },
+    {
+      "type_code": "agent_category",
+      "code": "explain",
+      "name": "解释类",
+      "sort_order": 10,
+      "attributes": {}
+    },
+    {
+      "type_code": "agent_category",
+      "code": "decision",
+      "name": "决策类",
+      "sort_order": 20,
+      "attributes": {}
+    },
+    {
+      "type_code": "step_status",
+      "code": "ok",
+      "name": "成功",
+      "sort_order": 10,
+      "attributes": {}
+    },
+    {
+      "type_code": "step_status",
+      "code": "skipped",
+      "name": "跳过",
+      "sort_order": 20,
+      "attributes": {}
+    },
+    {
+      "type_code": "step_status",
+      "code": "failed",
+      "name": "失败",
+      "sort_order": 30,
+      "attributes": {}
+    },
+    {
+      "type_code": "step_status",
+      "code": "replaced",
+      "name": "已替换",
+      "sort_order": 40,
+      "attributes": {}
+    },
+    {
+      "type_code": "tool_kind",
+      "code": "retrieval",
+      "name": "检索",
+      "sort_order": 10,
+      "attributes": {}
+    },
+    {
+      "type_code": "tool_kind",
+      "code": "context",
+      "name": "上下文",
+      "sort_order": 20,
+      "attributes": {}
+    },
+    {
+      "type_code": "tool_kind",
+      "code": "format",
+      "name": "格式化",
+      "sort_order": 30,
+      "attributes": {}
+    },
+    {
+      "type_code": "tool_kind",
+      "code": "guard",
+      "name": "校验",
+      "sort_order": 40,
+      "attributes": {}
+    },
+    {
+      "type_code": "setting_group",
+      "code": "agent",
+      "name": "智能体",
+      "sort_order": 80,
+      "attributes": {}
+    },
+    {
+      "type_code": "expense_category",
+      "code": "rent",
+      "name": "房租",
+      "sort_order": 10,
+      "attributes": {
+        "essential": true,
+        "default_amount": 700,
+        "default_growth": 0.02
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "food",
+      "name": "餐饮",
+      "sort_order": 20,
+      "attributes": {
+        "essential": true,
+        "default_amount": 800,
+        "default_growth": 0.02
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "transport",
+      "name": "交通",
+      "sort_order": 30,
+      "attributes": {
+        "essential": true,
+        "default_amount": 100,
+        "default_growth": 0.02
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "daily",
+      "name": "日用品",
+      "sort_order": 40,
+      "attributes": {
+        "essential": true,
+        "default_amount": 100,
+        "default_growth": 0.02
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "telecom",
+      "name": "通讯",
+      "sort_order": 50,
+      "attributes": {
+        "essential": true,
+        "default_amount": 80,
+        "default_growth": 0.0
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "study",
+      "name": "学习",
+      "sort_order": 60,
+      "attributes": {
+        "essential": false,
+        "default_amount": 250,
+        "default_growth": 0.03
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "social",
+      "name": "社交",
+      "sort_order": 70,
+      "attributes": {
+        "essential": false,
+        "default_amount": 150,
+        "default_growth": 0.03
+      }
+    },
+    {
+      "type_code": "expense_category",
+      "code": "entertainment",
+      "name": "娱乐",
+      "sort_order": 80,
+      "attributes": {
+        "essential": false,
+        "default_amount": 150,
+        "default_growth": 0.03
+      }
+    },
+    {
+      "type_code": "income_source",
+      "code": "assistantship",
+      "name": "助研助教",
+      "sort_order": 50,
+      "attributes": {
+        "distribution": "segmented",
+        "has_probability": false,
+        "has_interrupt": true,
+        "has_window": true,
+        "has_amount_range": true
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "working",
+      "name": "已工作",
+      "short_name": "已工作",
+      "sort_order": 80,
+      "attributes": {
+        "income_windows": {
+          "internship": [
+            1,
+            36
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "gap_year",
+      "name": "间隔年与备考",
+      "short_name": "间隔年与备考",
+      "sort_order": 90,
+      "attributes": {
+        "income_windows": {
+          "internship": [
+            1,
+            36
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    },
+    {
+      "type_code": "grade",
+      "code": "other",
+      "name": "其他",
+      "short_name": "其他",
+      "sort_order": 100,
+      "attributes": {
+        "income_windows": {
+          "internship": [
+            1,
+            36
+          ],
+          "assistantship": [
+            1,
+            120
+          ]
+        }
+      }
+    }
+  ]
+}

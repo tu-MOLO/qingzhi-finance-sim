@@ -1,0 +1,45 @@
+/* 设计变量。颜色、字号、间距的唯一来源，组件样式只引用变量。 */
+
+:root {
+  /* 主色与派生色 */
+  --red-900: #4A0B0E;
+  --red-800: #6B0F13;
+  --red-700: #8A1116;
+  --red-600: #B4121A;
+  --red-500: #C8161D;
+  --red-200: #EBB6B7;
+  --red-100: #F6DCDD;
+  --red-50: #FCF2F2;
+
+  /* 中性色 */
+  --ink-900: #17161A;
+  --ink-700: #3A3840;
+  --ink-500: #6B6870;
+  --ink-400: #8A8790;
+  --ink-300: #A8A5AC;
+  --ink-200: #CFCDD2;
+  --ink-100: #E7E5E9;
+  --ink-50: #F4F3F5;
+
+  /* 底色 */
+  --paper: #FFFFFF;
+  --paper-2: #FAF9F8;
+
+  /* 图表默认色。账户配色由接口下发，此处的区间色仅用于分位带 */
+  --chart-band: #EBB6B7;
+  --chart-line: #B4121A;
+  --chart-grid: #EAE8EB;
+
+  /* 字型 */
+  --serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", system-ui, sans-serif;
+  --mono: "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+
+  /* 尺寸 */
+  --r-lg: 14px;
+  --r-md: 10px;
+  --r-sm: 6px;
+  --rule: 1px solid var(--ink-100);
+  --shell-max: 1280px;
+  --shell-pad: 32px;
+}

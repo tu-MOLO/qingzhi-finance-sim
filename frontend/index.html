@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+
+<!-- This file describes structure only.
+     All visible copy, enumerations, chart titles and account colours
+     are provided by the API at runtime. No business content lives here. -->
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="mark" id="brand-mark"></div>
+      <div>
+        <h1 id="brand-name"></h1>
+        <div class="sub" data-text="app.subtitle"></div>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="chip" id="meta-version"></span>
+      <button class="chip chip-btn" type="button" id="agent-entry"></button>
+      <span class="chip accent" data-text="app.badge.local"></span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-in" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="sandbox">
+      <span data-text="tab.sandbox"></span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="profile">
+      <span data-text="tab.profile"></span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="term">
+      <span data-text="tab.term"></span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="settings">
+      <span data-text="tab.settings"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="shell">
+
+<!-- section: profile -->
+<section class="panel" id="panel-profile" role="tabpanel">
+  <div class="grid-3-2">
+    <div>
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-text="section.base_info"></h2>
+          <span class="note" data-text="section.base_info.note"></span>
+          <span class="sec-actions profile-actions">
+            <select id="archetype" class="compact"></select>
+            <button class="btn sm" id="load-archetype" data-text="button.load_archetype"></button>
+            <input type="text" id="profile-name" class="compact profile-name" maxlength="20">
+            <button class="btn sm" id="save-profile" data-text="button.save_profile"></button>
+            <button class="btn sm ghost" id="delete-profile" data-text="button.delete_profile"></button>
+          </span>
+        </div>
+        <div class="card">
+          <p class="muted-note" data-text="section.base_info.guide"></p>
+          <div class="grid2">
+            <div class="field"><label for="grade" data-text="field.grade"></label><select id="grade"></select><div class="hint" data-text="section.base_info.grade_hint"></div></div>
+            <div class="field"><label for="living" data-text="field.living_cost"></label><input type="number" id="living" min="1" step="50"></div>
+            <div class="field"><label for="initial" data-text="field.initial_balance"></label><input type="number" id="initial" min="0" step="500"><div class="hint" data-text="field.initial_balance.hint"></div></div>
+            <div class="field"><label for="growth" data-text="field.living_growth"></label><input type="number" id="growth" min="0" max="0.1" step="0.01"><div class="hint" data-text="field.living_growth.hint"></div></div>
+            <div class="field"><label for="appetite" data-text="field.risk_appetite"></label><select id="appetite"></select></div>
+            <div class="field"><label for="months" data-text="field.months"></label><input type="number" id="months" min="12" max="120" step="12"><div class="hint" data-text="field.months.hint"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-text="section.income"></h2>
+          <span class="note" data-text="section.income.note"></span>
+        </div>
+        <div class="card card-tight" id="sources"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-text="section.expense"></h2>
+          <span class="note" data-text="section.expense.note"></span>
+        </div>
+        <div class="card card-tight" id="expenses"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-text="section.goals"></h2>
+          <span class="note" data-text="section.goals.note"></span>
+          <span class="sec-actions"><button class="btn sm" id="add-goal" data-text="button.add_goal"></button></span>
+        </div>
+        <div class="card">
+          <div class="goal-head" id="goal-head"></div>
+          <div id="goals"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec">
+        <div class="sec-head"><h2 data-text="section.budget"></h2></div>
+        <div class="card">
+          <p class="muted-note" data-text="section.budget.note"></p>
+          <div class="field">
+            <label for="budget-growth" data-text="field.growth_budget"></label>
+            <input type="number" id="budget-growth" min="0" step="50">
+            <div class="hint" data-text="field.growth_budget.hint"></div>
+          </div>
+          <div class="field last">
+            <label for="budget-treat" data-text="field.treat_budget"></label>
+            <input type="number" id="budget-treat" min="0" step="50">
+            <div class="hint" data-text="field.treat_budget.hint"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head"><h2 data-text="section.assumptions"></h2></div>
+        <div class="card">
+          <p class="muted-note" data-text="section.assumptions.note"></p>
+          <div class="param-list" id="param-note"></div>
+        </div>
+      </div>
+
+      <button class="btn primary btn-block" id="run" data-text="button.run"></button>
+      <div class="recalc center" id="run-hint"><span class="spin"></span><span id="run-hint-text"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- section: sandbox -->
+<section class="panel on" id="panel-sandbox" role="tabpanel">
+  <div class="sec">
+    <div class="position">
+      <div class="pos-item"><span class="pk" data-text="position.for_who"></span><span class="pv" id="pos-for"></span></div>
+      <div class="pos-item"><span class="pk" data-text="position.what"></span><span class="pv" id="pos-what"></span></div>
+      <div class="pos-item"><span class="pk" data-text="position.not"></span><span class="pv" id="pos-not"></span></div>
+      <button class="btn sm" id="pos-edit" data-text="position.edit"></button>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="howto">
+      <button class="howto-toggle" id="howto-toggle" aria-expanded="false">
+        <span class="ht-caret"></span><span data-text="howto.toggle"></span>
+      </button>
+      <ol class="howto-steps" id="howto-steps" hidden></ol>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="verdict">
+      <div class="verdict-lead" data-text="section.verdict"></div>
+      <div class="verdict-grid">
+        <div class="vcell">
+          <div class="vk ex" data-explain="hit_probability" data-text="verdict.hit_probability"></div>
+          <div class="vnum red" id="v1"></div>
+          <div class="vsub" id="v1s" data-text="verdict.pending"></div>
+        </div>
+        <div class="vcell">
+          <div class="vk ex" data-explain="median_month" data-text="verdict.delay"></div>
+          <div class="vnum" id="v2"></div>
+          <div class="vsub" id="v2s" data-text="verdict.pending"></div>
+        </div>
+        <div class="vcell">
+          <div class="vk ex" data-explain="risk_grade" data-text="verdict.capacity"></div>
+          <div class="vnum" id="v3"></div>
+          <div class="vsub" id="v3s" data-text="verdict.pending"></div>
+        </div>
+      </div>
+      <div class="vfoot" id="vfoot"></div>
+      <div class="vdeficit" id="v-deficit" hidden></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2 data-text="section.results"></h2><span class="note" id="chart-note"></span></div>
+    <div class="charts">
+      <div class="chart">
+        <h3 data-text="chart.band.title"></h3>
+        <div class="cap" data-text="chart.band.caption"></div>
+        <div id="chart-band"></div>
+        <div class="legend">
+          <span><i class="swatch" id="sw-band-range"></i><span data-text="chart.band.legend.range"></span></span>
+          <span><i class="swatch" id="sw-band-median"></i><span data-text="chart.band.legend.median"></span></span>
+        </div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.paths.title"></h3>
+        <div class="cap" data-text="chart.paths.caption"></div>
+        <div id="chart-paths"></div>
+        <div class="legend" id="paths-legend"></div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.hist.title"></h3>
+        <div class="cap" data-text="chart.hist.caption"></div>
+        <div id="chart-hist"></div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.goals.title"></h3>
+        <div class="cap" data-text="chart.goals.caption"></div>
+        <div id="chart-goals"></div>
+        <div class="legend" id="goal-legend"></div>
+        <div class="gap-list" id="goal-gaps"></div>
+        <div class="scen" id="scenario"></div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.reach.title"></h3>
+        <div class="cap" data-text="chart.reach.caption"></div>
+        <div id="chart-reach"></div>
+        <div class="legend" id="reach-legend"></div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.accounts.title"></h3>
+        <div class="cap" data-text="chart.accounts.caption"></div>
+        <div id="chart-accounts"></div>
+        <div class="legend" id="account-legend"></div>
+      </div>
+      <div class="chart">
+        <h3 data-text="chart.capacity.title"></h3>
+        <div class="cap" data-text="chart.capacity.caption"></div>
+        <div id="chart-capacity"></div>
+        <div class="legend" id="capacity-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><h2 data-text="section.decision"></h2><span class="note" data-text="section.decision.note"></span></div>
+    <div class="card">
+      <div class="goal-pick">
+        <label for="goal-pick" data-text="plan.pick"></label>
+        <select id="goal-pick"></select>
+        <span class="tag" id="plan-tag" data-text="plan.tag.pending"></span>
+      </div>
+      <div class="plans" id="plans"><div class="empty" data-text="plan.empty"></div></div>
+      <div class="recalc" id="recalc"><span class="spin"></span><span id="recalc-text"></span></div>
+      <div class="notice" id="disclaimer"></div>
+    </div>
+  </div>
+
+  <div class="sec" id="insight-sec" hidden>
+    <div class="sec-head">
+      <h2 data-text="insight.title"></h2>
+      <span class="note" data-text="insight.caption"></span>
+      <span class="sec-actions"><button class="btn sm" id="run-insight" data-text="insight.run"></button></span>
+    </div>
+    <div class="card">
+      <div class="empty" id="insight-body" data-text="insight.empty"></div>
+    </div>
+  </div>
+
+  <div class="sec" id="assumption-sec">
+    <div class="sec-head">
+      <h2 data-text="assume.title"></h2>
+      <span class="note" data-text="assume.note"></span>
+    </div>
+    <div class="card">
+      <div class="assume-legend">
+        <span><i class="swatch pm"></i><span data-text="assume.legend.measured"></span></span>
+        <span><i class="swatch pa"></i><span data-text="assume.legend.assumed"></span></span>
+        <span><i class="swatch pc"></i><span data-text="assume.legend.conventional"></span></span>
+      </div>
+      <div class="assume-list" id="assume-list"></div>
+    </div>
+  </div>
+
+  <div class="sec" id="whatif-sec">
+    <div class="sec-head">
+      <h2 data-text="whatif.title"></h2>
+      <span class="note" data-text="whatif.note"></span>
+      <span class="sec-actions"><button class="btn sm" id="run-whatif" data-text="whatif.run"></button></span>
+    </div>
+    <div class="card">
+      <div class="empty" id="whatif-body" data-text="whatif.empty"></div>
+    </div>
+  </div>
+</section>
+
+<!-- section: term -->
+<section class="panel" id="panel-term" role="tabpanel">
+  <div class="sec">
+    <div class="sec-head"><h2 data-text="section.term"></h2><span class="note" data-text="section.term.note"></span></div>
+    <div class="card">
+      <div class="term-row">
+        <input type="text" id="term-input" list="term-list" maxlength="20">
+        <datalist id="term-list"></datalist>
+        <button class="btn primary" id="lookup" data-text="button.lookup"></button>
+      </div>
+      <div class="hint" id="term-hint"></div>
+    </div>
+  </div>
+  <div class="layers" id="layers"><div class="empty" data-text="term.empty"></div></div>
+
+  <div class="sec" id="agent-sec" hidden>
+    <div class="sec-head">
+      <h2 data-text="term.agent.title"></h2>
+      <span class="note" id="agent-note"></span>
+    </div>
+    <div class="card">
+      <div class="agent-meta" id="agent-meta"></div>
+      <div class="agent-steps" id="agent-steps"></div>
+    </div>
+  </div>
+</section>
+
+<!-- section: settings -->
+<section class="panel" id="panel-settings" role="tabpanel">
+  <div class="sec">
+    <div class="sec-head">
+      <h2 data-text="section.settings"></h2>
+      <span class="note" data-text="section.settings.note"></span>
+    </div>
+    <div class="card">
+      <p class="muted-note" data-text="settings.local_only"></p>
+      <div class="agent-status" id="agent-status"></div>
+      <div class="grid2">
+        <div class="field">
+          <label for="set-provider" data-text="field.provider"></label>
+          <select id="set-provider">
+            <option value="rule" data-text="field.provider.rule"></option>
+            <option value="openai_compat" data-text="field.provider.model"></option>
+          </select>
+          <div class="hint" data-text="field.provider.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-base-url" data-text="field.base_url"></label>
+          <input type="text" id="set-base-url" maxlength="512">
+          <div class="hint" data-text="field.base_url.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-model" data-text="field.model"></label>
+          <input type="text" id="set-model" maxlength="128">
+          <div class="hint" data-text="field.model.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-api-key" data-text="field.api_key"></label>
+          <input type="password" id="set-api-key" autocomplete="off" spellcheck="false">
+          <div class="hint" data-text="field.api_key.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-temperature" data-text="field.temperature"></label>
+          <input type="number" id="set-temperature" min="0" max="2" step="0.1">
+          <div class="hint" data-text="field.temperature.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-max-tokens" data-text="field.max_tokens"></label>
+          <input type="number" id="set-max-tokens" min="1" step="100">
+          <div class="hint" data-text="field.max_tokens.hint"></div>
+        </div>
+        <div class="field">
+          <label for="set-timeout" data-text="field.timeout"></label>
+          <input type="number" id="set-timeout" min="1" step="5">
+          <div class="hint" data-text="field.timeout.hint"></div>
+        </div>
+        <div class="field">
+          <label class="check-line" for="set-network">
+            <input type="checkbox" id="set-network">
+            <span data-text="field.allow_network"></span>
+          </label>
+          <div class="hint" data-text="field.allow_network.hint"></div>
+        </div>
+      </div>
+      <div class="set-actions">
+        <button class="btn primary" id="save-agent" data-text="button.agent_save"></button>
+        <button class="btn" id="test-agent" data-text="button.agent_test"></button>
+      </div>
+      <div class="recalc" id="agent-busy"><span class="spin"></span><span id="agent-busy-text"></span></div>
+      <div class="hint" id="agent-result"></div>
+      <p class="muted-note" data-text="settings.key_note"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="balance-bar">
+  <div class="balance-in">
+    <div class="bal-item"><span class="k" data-text="balance.available"></span><span class="v" id="bal-available"></span></div>
+    <div class="bal-item"><span class="k" data-text="balance.need"></span><span class="v" id="bal-need"></span></div>
+    <div class="bal-item"><span class="k" data-text="balance.income"></span><span class="v" id="bal-income"></span></div>
+    <div class="bal-item"><span class="k" data-text="balance.emergency"></span><span class="v" id="bal-emergency"></span></div>
+    <span class="bal-note" id="bal-note"></span>
+  </div>
+</div>
+
+<div class="explain-pop" id="explain-pop" hidden>
+  <div class="ep-in">
+    <div class="ep-head">
+      <span class="ep-term" id="ep-term"></span>
+      <button class="ep-close" id="ep-close" aria-label="close">×</button>
+    </div>
+    <div class="ep-body" id="ep-body"></div>
+    <div class="ep-trace" id="ep-trace" hidden></div>
+    <div class="ep-foot" id="ep-foot"></div>
+  </div>
+</div>
+
+<div class="boot" id="boot"><span class="spin"></span><span data-text="status.loading"></span></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/format.js"></script>
+<script src="/assets/js/select.js"></script>
+<script src="/assets/js/catalog.js"></script>
+<script src="/assets/js/charts.js"></script>
+<script src="/assets/js/views/profile.js"></script>
+<script src="/assets/js/views/sandbox.js"></script>
+<script src="/assets/js/views/term.js"></script>
+<script src="/assets/js/explain.js"></script>
+<script src="/assets/js/views/assume.js"></script>
+<script src="/assets/js/views/whatif.js"></script>
+<script src="/assets/js/views/settings.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "S", "C4", "SIM"]
+ignore = ["S101", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S608"]
+# 仓储层的 SQL 由模块级白名单常量拼出表名与列名，取值一律走占位符。
+# 接口层不得出现任何 SQL，这一点由 tests/data 下的检查守住。
+"backend/db/repository/*.py" = ["S608"]
+"backend/db/connection.py" = ["S608"]

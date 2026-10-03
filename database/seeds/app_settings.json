@@ -1,0 +1,434 @@
+{
+  "app_settings": [
+    {
+      "key": "agent.allow_network",
+      "group_code": "agent",
+      "name": "是否允许智能体联网",
+      "value": "0",
+      "value_type": "boolean",
+      "unit": null,
+      "description": "关闭时即使把生成方式设为 openai_compat 也一律走本地规则路径",
+      "editable": 1
+    },
+    {
+      "key": "agent.api_key_env",
+      "group_code": "agent",
+      "name": "凭据所在的环境变量名",
+      "value": "QINGZHI_AGENT_API_KEY",
+      "value_type": "string",
+      "unit": null,
+      "description": "凭据本体只从环境变量读取，不写入数据库，也不进版本控制",
+      "editable": 1
+    },
+    {
+      "key": "agent.base_url",
+      "group_code": "agent",
+      "name": "模型服务地址",
+      "value": "",
+      "value_type": "string",
+      "unit": null,
+      "description": "OpenAI 兼容接口的地址，本地推理服务也可填写。留空表示不调用外部服务",
+      "editable": 1
+    },
+    {
+      "key": "agent.forbidden_phrases",
+      "group_code": "agent",
+      "name": "合规校验的违禁措辞",
+      "value": "保证收益,确保收益,稳赚,必赚,保本保收益,一定盈利,零风险",
+      "value_type": "string",
+      "unit": null,
+      "description": "逗号分隔的措辞清单，按句子做子串匹配，命中即判定输出不合规",
+      "editable": 1
+    },
+    {
+      "key": "agent.compliance_exemptions",
+      "group_code": "agent",
+      "name": "合规校验的否定语境标记",
+      "value": "不是,并非,不代表,不等于,不承诺,不能保证,无法保证,没有保证,绝不,切勿",
+      "value_type": "string",
+      "unit": null,
+      "description": "逗号分隔的标记词。命中措辞所在的句子里出现这些词时按风险提示处理，不判违规",
+      "editable": 1
+    },
+    {
+      "key": "agent.max_attempts",
+      "group_code": "agent",
+      "name": "调用尝试次数",
+      "value": "2",
+      "value_type": "integer",
+      "unit": "次",
+      "description": "首次失败后的重试次数，重试仍失败则降级",
+      "editable": 1
+    },
+    {
+      "key": "agent.max_tokens",
+      "group_code": "agent",
+      "name": "单次生成的最大长度",
+      "value": "1200",
+      "value_type": "integer",
+      "unit": "词元",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "agent.model",
+      "group_code": "agent",
+      "name": "模型名称",
+      "value": "",
+      "value_type": "string",
+      "unit": null,
+      "description": "调用外部模型时使用的模型标识",
+      "editable": 1
+    },
+    {
+      "key": "agent.provider",
+      "group_code": "agent",
+      "name": "解释生成方式",
+      "value": "rule",
+      "value_type": "string",
+      "unit": null,
+      "description": "取 rule 或 openai_compat。rule 为本地确定性生成，不产生任何网络请求",
+      "editable": 1
+    },
+    {
+      "key": "agent.temperature",
+      "group_code": "agent",
+      "name": "生成温度",
+      "value": "0.2",
+      "value_type": "number",
+      "unit": null,
+      "description": "数值越低输出越稳定，便于结果可复现",
+      "editable": 1
+    },
+    {
+      "key": "agent.timeout_seconds",
+      "group_code": "agent",
+      "name": "单次调用的超时秒数",
+      "value": "20",
+      "value_type": "integer",
+      "unit": "秒",
+      "description": "超时即视为调用失败并回落到本地规则路径",
+      "editable": 1
+    },
+    {
+      "key": "agent.trace_enabled",
+      "group_code": "agent",
+      "name": "是否返回执行轨迹",
+      "value": "1",
+      "value_type": "boolean",
+      "unit": null,
+      "description": "开启后接口会返回每一步工具的执行情况，供界面展示与排查",
+      "editable": 1
+    },
+    {
+      "key": "capacity.calendar_months",
+      "group_code": "capacity",
+      "name": "容量日历展示月数",
+      "value": "24",
+      "value_type": "integer",
+      "unit": "月",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "capacity.pending_ramp_months",
+      "group_code": "capacity",
+      "name": "待备额爬升窗口",
+      "value": "12",
+      "value_type": "integer",
+      "unit": "月",
+      "description": "目标到期前多少个月开始计入待备额",
+      "editable": 1
+    },
+    {
+      "key": "capacity.rigidity_high",
+      "group_code": "capacity",
+      "name": "目标刚性下调阈值",
+      "value": "0.6",
+      "value_type": "number",
+      "unit": "比率",
+      "description": "超过该值时风险容量下调一档",
+      "editable": 1
+    },
+    {
+      "key": "capacity.rigidity_low",
+      "group_code": "capacity",
+      "name": "目标刚性上调阈值",
+      "value": "0.2",
+      "value_type": "number",
+      "unit": "比率",
+      "description": "低于该值时风险容量上调一档",
+      "editable": 1
+    },
+    {
+      "key": "explain.drawdown_reference_ratio",
+      "group_code": "explain",
+      "name": "回撤示例比例",
+      "value": "0.2",
+      "value_type": "number",
+      "unit": "比率",
+      "description": "术语第三层给出回撤影响时使用的示例幅度",
+      "editable": 1
+    },
+    {
+      "key": "report.path_samples",
+      "group_code": "report",
+      "name": "路径样本条数",
+      "value": "24",
+      "value_type": "integer",
+      "unit": "条",
+      "description": "路径样本图里画出的单条路径数量，按期终余额高低等距抽出",
+      "editable": 1
+    },
+    {
+      "key": "report.histogram_bins",
+      "group_code": "report",
+      "name": "期末余额分布格数",
+      "value": "20",
+      "value_type": "integer",
+      "unit": "格",
+      "description": "期末余额分布直方图的分组数量",
+      "editable": 1
+    },
+    {
+      "key": "limits.default_goal_amount",
+      "group_code": "limits",
+      "name": "新建目标的默认金额",
+      "value": "5000",
+      "value_type": "number",
+      "unit": "元",
+      "description": "在前端新增一条目标时的初始金额",
+      "editable": 1
+    },
+    {
+      "key": "limits.default_goal_due_month",
+      "group_code": "limits",
+      "name": "新建目标的默认到期月份",
+      "value": "12",
+      "value_type": "integer",
+      "unit": "月",
+      "description": "在前端新增一条目标时的初始到期月份",
+      "editable": 1
+    },
+    {
+      "key": "limits.max_goals",
+      "group_code": "limits",
+      "name": "人生目标数量上限",
+      "value": "5",
+      "value_type": "integer",
+      "unit": "项",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "limits.max_income_sources",
+      "group_code": "limits",
+      "name": "收入来源数量上限",
+      "value": "4",
+      "value_type": "integer",
+      "unit": "类",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "scenario.base_factor",
+      "group_code": "scenario",
+      "name": "基准档收入系数",
+      "value": "1.0",
+      "value_type": "number",
+      "unit": "倍数",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "scenario.optimistic_factor",
+      "group_code": "scenario",
+      "name": "乐观档收入系数",
+      "value": "1.2",
+      "value_type": "number",
+      "unit": "倍数",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scenario.pessimistic_factor",
+      "group_code": "scenario",
+      "name": "悲观档收入系数",
+      "value": "0.8",
+      "value_type": "number",
+      "unit": "倍数",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.norm_cushion_max",
+      "group_code": "scoring",
+      "name": "安全垫归一化上界",
+      "value": "12",
+      "value_type": "number",
+      "unit": "月",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.norm_cushion_min",
+      "group_code": "scoring",
+      "name": "安全垫归一化下界",
+      "value": "1",
+      "value_type": "number",
+      "unit": "月",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.norm_cv_max",
+      "group_code": "scoring",
+      "name": "变异系数归一化上界",
+      "value": "0.5",
+      "value_type": "number",
+      "unit": "比率",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.weight_cushion",
+      "group_code": "scoring",
+      "name": "安全垫权重",
+      "value": "0.5",
+      "value_type": "number",
+      "unit": "比率",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.weight_rigidity",
+      "group_code": "scoring",
+      "name": "目标刚性权重",
+      "value": "0.3",
+      "value_type": "number",
+      "unit": "比率",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "scoring.weight_stability",
+      "group_code": "scoring",
+      "name": "收入稳定性权重",
+      "value": "0.2",
+      "value_type": "number",
+      "unit": "比率",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "simulation.default_months",
+      "group_code": "simulation",
+      "name": "默认推演时长",
+      "value": "96",
+      "value_type": "integer",
+      "unit": "月",
+      "description": "首次加载画像与新建画像的默认值",
+      "editable": 0
+    },
+    {
+      "key": "simulation.default_paths",
+      "group_code": "simulation",
+      "name": "默认仿真次数",
+      "value": "10000",
+      "value_type": "integer",
+      "unit": "次",
+      "description": "蒙特卡洛抽样路径条数",
+      "editable": 0
+    },
+    {
+      "key": "simulation.default_seed",
+      "group_code": "simulation",
+      "name": "默认随机种子",
+      "value": "20260930",
+      "value_type": "integer",
+      "unit": null,
+      "description": "固定种子保证同输入同输出",
+      "editable": 0
+    },
+    {
+      "key": "simulation.max_months",
+      "group_code": "simulation",
+      "name": "推演时长上限",
+      "value": "120",
+      "value_type": "integer",
+      "unit": "月",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "simulation.max_path_months",
+      "group_code": "simulation",
+      "name": "次数与时长乘积上限",
+      "value": "2000000",
+      "value_type": "integer",
+      "unit": null,
+      "description": "防止单个请求把内存与计算量推到不可控",
+      "editable": 1
+    },
+    {
+      "key": "simulation.max_paths",
+      "group_code": "simulation",
+      "name": "仿真次数上限",
+      "value": "50000",
+      "value_type": "integer",
+      "unit": "次",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "simulation.min_months",
+      "group_code": "simulation",
+      "name": "推演时长下限",
+      "value": "12",
+      "value_type": "integer",
+      "unit": "月",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "simulation.min_paths",
+      "group_code": "simulation",
+      "name": "仿真次数下限",
+      "value": "500",
+      "value_type": "integer",
+      "unit": "次",
+      "description": null,
+      "editable": 0
+    },
+    {
+      "key": "solver.max_iterations",
+      "group_code": "solver",
+      "name": "二分迭代上限",
+      "value": "20",
+      "value_type": "integer",
+      "unit": "次",
+      "description": null,
+      "editable": 1
+    },
+    {
+      "key": "solver.target_probability",
+      "group_code": "solver",
+      "name": "方案一的目标线",
+      "value": "0.5",
+      "value_type": "number",
+      "unit": "比率",
+      "description": "中位路径能够按期达成",
+      "editable": 1
+    },
+    {
+      "key": "solver.tolerance",
+      "group_code": "solver",
+      "name": "二分收敛精度",
+      "value": "8",
+      "value_type": "number",
+      "unit": "元",
+      "description": null,
+      "editable": 1
+    }
+  ]
+}

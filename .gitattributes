@@ -1,0 +1,23 @@
+* text=auto
+
+# 文本文件统一使用 LF 入库
+*.py   text eol=lf
+*.md   text eol=lf
+*.toml text eol=lf
+*.csv  text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 二进制文件不做换行转换
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.pdf  binary
+*.zip  binary
+
+# 语言统计时排除
+memory-bank/** linguist-documentation

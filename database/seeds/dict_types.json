@@ -1,0 +1,88 @@
+{
+  "dict_types": [
+    {
+      "code": "income_source",
+      "name": "收入来源类别",
+      "description": "生活费为确定性收入，其余为不确定收入",
+      "sort_order": 10
+    },
+    {
+      "code": "grade",
+      "name": "年级",
+      "description": "影响实习收入的出现时点",
+      "sort_order": 20
+    },
+    {
+      "code": "risk_appetite",
+      "name": "风险偏好档位",
+      "description": "用户主观意愿，与客观风险容量取较严者",
+      "sort_order": 30
+    },
+    {
+      "code": "plan_type",
+      "name": "方案类型",
+      "description": "二选一方案的两种互斥形态",
+      "sort_order": 40
+    },
+    {
+      "code": "param_property",
+      "name": "参数性质",
+      "description": "参数是否具备公开实测来源",
+      "sort_order": 50
+    },
+    {
+      "code": "corpus_type",
+      "name": "语料文档类别",
+      "description": "术语解释所依据的公开文本类型",
+      "sort_order": 60
+    },
+    {
+      "code": "scenario",
+      "name": "情景档位",
+      "description": "三档情景对比所使用的假设档次",
+      "sort_order": 70
+    },
+    {
+      "code": "message_category",
+      "name": "文案类别",
+      "description": "提示与合规文案的分类",
+      "sort_order": 80
+    },
+    {
+      "code": "ui_area",
+      "name": "界面文案分区",
+      "description": "界面固定文案所属的页面区域",
+      "sort_order": 90
+    },
+    {
+      "code": "setting_group",
+      "name": "配置分组",
+      "description": "应用配置按用途分组",
+      "sort_order": 100
+    },
+    {
+      "code": "agent_category",
+      "name": "智能体类别",
+      "description": "按用途划分的智能体分类",
+      "sort_order": 110
+    },
+    {
+      "code": "step_status",
+      "name": "执行步骤状态",
+      "description": "工具与生成步骤的执行结果",
+      "sort_order": 120
+    },
+    {
+      "code": "tool_kind",
+      "name": "工具类别",
+      "description": "按职责划分的工具分类",
+      "sort_order": 130
+    },
+    {
+      "code": "expense_category",
+      "name": "支出类别",
+      "description": "每月实际花掉的支出项目，分刚需与弹性",
+      "sort_order": 25
+    }
+  ]
+}

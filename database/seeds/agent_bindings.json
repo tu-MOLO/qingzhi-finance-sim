@@ -1,0 +1,58 @@
+{
+  "agent_bindings": [
+    {
+      "agent_code": "term_explain",
+      "tool_code": "corpus_lookup",
+      "required": 1,
+      "sort_order": 10
+    },
+    {
+      "agent_code": "term_explain",
+      "tool_code": "simulation_context",
+      "required": 1,
+      "sort_order": 20
+    },
+    {
+      "agent_code": "term_explain",
+      "tool_code": "amount_formatter",
+      "required": 1,
+      "sort_order": 30
+    },
+    {
+      "agent_code": "term_explain",
+      "tool_code": "compliance_guard",
+      "required": 1,
+      "sort_order": 40
+    },
+    {
+      "agent_code": "plan_insight",
+      "tool_code": "simulation_context",
+      "required": 1,
+      "sort_order": 10
+    },
+    {
+      "agent_code": "plan_insight",
+      "tool_code": "scenario_compare",
+      "required": 1,
+      "sort_order": 20
+    },
+    {
+      "agent_code": "plan_insight",
+      "tool_code": "allocation_profile",
+      "required": 1,
+      "sort_order": 30
+    },
+    {
+      "agent_code": "plan_insight",
+      "tool_code": "amount_formatter",
+      "required": 1,
+      "sort_order": 40
+    },
+    {
+      "agent_code": "plan_insight",
+      "tool_code": "compliance_guard",
+      "required": 1,
+      "sort_order": 50
+    }
+  ]
+}

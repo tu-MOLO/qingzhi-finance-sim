@@ -1,0 +1,39 @@
+{
+  "risk_levels": [
+    {
+      "code": "very_low",
+      "name": "极低",
+      "min_cushion_months": 0.0,
+      "equity_cap": 0.1,
+      "sort_order": 50
+    },
+    {
+      "code": "low",
+      "name": "低",
+      "min_cushion_months": 1.0,
+      "equity_cap": 0.2,
+      "sort_order": 40
+    },
+    {
+      "code": "medium",
+      "name": "中",
+      "min_cushion_months": 3.0,
+      "equity_cap": 0.35,
+      "sort_order": 30
+    },
+    {
+      "code": "medium_high",
+      "name": "中高",
+      "min_cushion_months": 6.0,
+      "equity_cap": 0.5,
+      "sort_order": 20
+    },
+    {
+      "code": "high",
+      "name": "高",
+      "min_cushion_months": 12.0,
+      "equity_cap": 0.6,
+      "sort_order": 10
+    }
+  ]
+}

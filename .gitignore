@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# 依赖与打包
+pip-log.txt
+pip-delete-this-directory.txt
+*.whl
+
+# 测试与覆盖率
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# 类型检查与格式化缓存
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit 本地配置与密钥
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# 运行期数据库文件
+database/var/*
+!database/var/.gitkeep
+
+# 运行产物
+outputs/
+results/
+logs/
+*.log
+
+# 本地环境与凭据
+.env
+.env.*
+*.pem
+
+# 崩溃转储
+*.dmp
+core
+core.*
+
+# 测试与检查缓存
+.ruff_cache/
+coverage.xml
+junit*.xml
+
+# Office 临时文件
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# 编辑器与 IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.code-workspace
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 工具与代理会话数据
+.workbuddy/
+
+# 临时文件
+.tmp/

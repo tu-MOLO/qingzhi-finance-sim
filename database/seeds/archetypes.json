@@ -1,0 +1,490 @@
+{
+  "archetypes": [
+    {
+      "archetype_id": "intern_junior",
+      "kind": "builtin",
+      "name": "多元收入型",
+      "summary": "收入来源最多、波动也最大的一张。家庭支持打底，兼职与奖学金并行，实习带来阶段性收入；刚需占比适中，目标是几笔分散在不同时点的确定支出。",
+      "highlights": [
+        "家庭支持、兼职、奖学金、实习多路并行",
+        "刚需占比约七成五，弹性支出有压缩空间",
+        "目标分布在第 12、30、42 月，近远结合"
+      ],
+      "city": "guangzhou",
+      "grade": "g3",
+      "living_cost": 2050,
+      "living_growth": 0.03,
+      "initial_balance": 3000,
+      "risk_appetite": "medium",
+      "months": 96,
+      "paths": 10000,
+      "seed": 20260930,
+      "growth_budget": 300,
+      "treat_budget": 600,
+      "enabled": 1,
+      "sort_order": 10,
+      "income_sources": [
+        {
+          "source_type": "living",
+          "enabled": 1,
+          "probability": 1.0,
+          "amount_low": 2050,
+          "amount_mid": 2050,
+          "amount_high": 2050,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "part_time",
+          "enabled": 1,
+          "probability": 0.683,
+          "amount_low": 500,
+          "amount_mid": 1000,
+          "amount_high": 1500,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.05
+        },
+        {
+          "source_type": "scholarship",
+          "enabled": 1,
+          "probability": 0.09,
+          "amount_low": 3000,
+          "amount_mid": 5500,
+          "amount_high": 8000,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "internship",
+          "enabled": 1,
+          "probability": 1.0,
+          "amount_low": 2000,
+          "amount_mid": 2000,
+          "amount_high": 2000,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.1
+        },
+        {
+          "source_type": "assistantship",
+          "enabled": 0,
+          "probability": 1.0,
+          "amount_low": 800,
+          "amount_mid": 800,
+          "amount_high": 800,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        }
+      ],
+      "goals": [
+        {
+          "goal_id": "g1",
+          "name": "升学备付金",
+          "amount": 36000,
+          "due_month": 30,
+          "priority": 1
+        },
+        {
+          "goal_id": "g2",
+          "name": "考证与课程",
+          "amount": 6000,
+          "due_month": 12,
+          "priority": 2
+        },
+        {
+          "goal_id": "g3",
+          "name": "毕业旅行",
+          "amount": 12000,
+          "due_month": 42,
+          "priority": 3
+        }
+      ],
+      "expenses": [
+        {
+          "category": "rent",
+          "amount": 700,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "food",
+          "amount": 800,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "transport",
+          "amount": 100,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "daily",
+          "amount": 100,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "telecom",
+          "amount": 80,
+          "essential": 1,
+          "growth_rate": 0.0,
+          "enabled": 1
+        },
+        {
+          "category": "study",
+          "amount": 300,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "social",
+          "amount": 150,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "entertainment",
+          "amount": 150,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        }
+      ]
+    },
+    {
+      "archetype_id": "postgrad_exam",
+      "kind": "builtin",
+      "name": "高刚需型",
+      "summary": "收入以家庭支持为主，兼职投入有限；刚需在支出里占了大头，第一笔大额目标在近期到期，几乎没有容错空间。",
+      "highlights": [
+        "刚需占支出八成以上，压缩空间很小",
+        "首个目标第 12 月到期，金额接近一年结余",
+        "收入来源少，波动来自兼职与奖学金"
+      ],
+      "city": "wuhan",
+      "grade": "g3",
+      "living_cost": 2000,
+      "living_growth": 0.03,
+      "initial_balance": 6000,
+      "risk_appetite": "low",
+      "months": 96,
+      "paths": 10000,
+      "seed": 20260930,
+      "growth_budget": 300,
+      "treat_budget": 300,
+      "enabled": 1,
+      "sort_order": 20,
+      "income_sources": [
+        {
+          "source_type": "living",
+          "enabled": 1,
+          "probability": 1.0,
+          "amount_low": 2000,
+          "amount_mid": 2000,
+          "amount_high": 2000,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "part_time",
+          "enabled": 1,
+          "probability": 0.6,
+          "amount_low": 500,
+          "amount_mid": 1000,
+          "amount_high": 1500,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.08
+        },
+        {
+          "source_type": "scholarship",
+          "enabled": 1,
+          "probability": 0.1,
+          "amount_low": 3000,
+          "amount_mid": 5500,
+          "amount_high": 8000,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "internship",
+          "enabled": 0,
+          "probability": 1.0,
+          "amount_low": 1800,
+          "amount_mid": 1800,
+          "amount_high": 1800,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.1
+        },
+        {
+          "source_type": "assistantship",
+          "enabled": 0,
+          "probability": 1.0,
+          "amount_low": 800,
+          "amount_mid": 800,
+          "amount_high": 800,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        }
+      ],
+      "goals": [
+        {
+          "goal_id": "g1",
+          "name": "学习进修费",
+          "amount": 10000,
+          "due_month": 12,
+          "priority": 1
+        },
+        {
+          "goal_id": "g2",
+          "name": "进修追加费",
+          "amount": 8000,
+          "due_month": 20,
+          "priority": 2
+        },
+        {
+          "goal_id": "g3",
+          "name": "搬家押金",
+          "amount": 8000,
+          "due_month": 30,
+          "priority": 3
+        }
+      ],
+      "expenses": [
+        {
+          "category": "rent",
+          "amount": 800,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "food",
+          "amount": 750,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "transport",
+          "amount": 80,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "daily",
+          "amount": 80,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "telecom",
+          "amount": 60,
+          "essential": 1,
+          "growth_rate": 0.0,
+          "enabled": 1
+        },
+        {
+          "category": "study",
+          "amount": 300,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "social",
+          "amount": 50,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "entertainment",
+          "amount": 50,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        }
+      ]
+    },
+    {
+      "archetype_id": "civil_service",
+      "kind": "builtin",
+      "name": "长期积累型",
+      "summary": "收入稳定但绝对额不高，没有短期刚性目标，主要靠长时间持续储蓄把远期目标攒出来。",
+      "highlights": [
+        "家庭支持占比高，收入绝对额低但相对稳定",
+        "目标跨度一年半到五年，无短期刚性",
+        "依赖长期储蓄，对突发支出敏感"
+      ],
+      "city": "zhengzhou",
+      "grade": "g3",
+      "living_cost": 1900,
+      "living_growth": 0.02,
+      "initial_balance": 3000,
+      "risk_appetite": "medium",
+      "months": 96,
+      "paths": 10000,
+      "seed": 20260930,
+      "growth_budget": 400,
+      "treat_budget": 400,
+      "enabled": 1,
+      "sort_order": 30,
+      "income_sources": [
+        {
+          "source_type": "living",
+          "enabled": 1,
+          "probability": 1.0,
+          "amount_low": 1900,
+          "amount_mid": 1900,
+          "amount_high": 1900,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "part_time",
+          "enabled": 1,
+          "probability": 0.6,
+          "amount_low": 400,
+          "amount_mid": 850,
+          "amount_high": 1300,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.06
+        },
+        {
+          "source_type": "scholarship",
+          "enabled": 1,
+          "probability": 0.1,
+          "amount_low": 2000,
+          "amount_mid": 4000,
+          "amount_high": 6000,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        },
+        {
+          "source_type": "internship",
+          "enabled": 0,
+          "probability": 1.0,
+          "amount_low": 1800,
+          "amount_mid": 1800,
+          "amount_high": 1800,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.1
+        },
+        {
+          "source_type": "assistantship",
+          "enabled": 0,
+          "probability": 1.0,
+          "amount_low": 800,
+          "amount_mid": 800,
+          "amount_high": 800,
+          "start_month": 1,
+          "end_month": 96,
+          "interrupt_prob": 0.0
+        }
+      ],
+      "goals": [
+        {
+          "goal_id": "g1",
+          "name": "技能提升基金",
+          "amount": 8000,
+          "due_month": 18,
+          "priority": 1
+        },
+        {
+          "goal_id": "g2",
+          "name": "过渡储备金",
+          "amount": 8000,
+          "due_month": 36,
+          "priority": 2
+        },
+        {
+          "goal_id": "g3",
+          "name": "家庭责任储备",
+          "amount": 10000,
+          "due_month": 60,
+          "priority": 3
+        }
+      ],
+      "expenses": [
+        {
+          "category": "rent",
+          "amount": 420,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "food",
+          "amount": 620,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "transport",
+          "amount": 60,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "daily",
+          "amount": 80,
+          "essential": 1,
+          "growth_rate": 0.02,
+          "enabled": 1
+        },
+        {
+          "category": "telecom",
+          "amount": 60,
+          "essential": 1,
+          "growth_rate": 0.0,
+          "enabled": 1
+        },
+        {
+          "category": "study",
+          "amount": 250,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "social",
+          "amount": 100,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        },
+        {
+          "category": "entertainment",
+          "amount": 100,
+          "essential": 0,
+          "growth_rate": 0.03,
+          "enabled": 1
+        }
+      ]
+    }
+  ]
+}
