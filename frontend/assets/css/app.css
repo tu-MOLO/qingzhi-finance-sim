@@ -169,7 +169,10 @@ select.cselect-native { position: absolute; inset: 0; width: 100%; height: 100%;
 .vfoot { margin-top: 20px; padding-top: 14px; border-top: var(--rule); font-size: 11.5px; color: var(--ink-400); font-family: var(--mono); line-height: 1.9; }
 
 /* ---------------------------------------------------------- 图表 */
-.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+/* 两列各自纵向排布：卡片按内容取自己的高度，同列卡片顺次上移。
+   若只用一个 grid，行高由同排最高的卡决定，矮卡下方必然空出一段 */
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.chart-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .chart { background: var(--paper); border: var(--rule); border-radius: var(--r-lg); padding: 18px 20px 14px; }
 .chart h3 { font-size: 13.5px; font-weight: 500; margin: 0 0 2px; }
 .chart .cap { font-size: 11.5px; color: var(--ink-400); margin-bottom: 12px; }
@@ -177,6 +180,21 @@ select.cselect-native { position: absolute; inset: 0; width: 100%; height: 100%;
 .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 11.5px; color: var(--ink-500); }
 .legend span { display: flex; align-items: center; gap: 5px; }
 .swatch { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
+/* 悬停读数。三层都压在图上且不吃鼠标事件，指针进出读数框不会打断 */
+.chart-live { position: relative; }
+.cc-layer { position: absolute; inset: 0; pointer-events: none; }
+.cc-layer[hidden] { display: none; }
+.cc-line { position: absolute; width: 1px; background: var(--ink-300); opacity: .6; }
+.cc-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--paper); transform: translate(-50%, -50%); }
+.cc-tip { position: absolute; top: 4px; z-index: 5; padding: 7px 10px; background: var(--paper); border: 1px solid var(--ink-200); border-radius: var(--r-sm); box-shadow: 0 8px 20px rgba(23, 22, 26, .13); font-size: 11.5px; line-height: 1.65; pointer-events: none; transform: translateX(11px); }
+.cc-tip[hidden] { display: none; }
+.cc-tip.cc-flip { transform: translateX(calc(-100% - 11px)); }
+.cc-tip .cc-h { font-family: var(--mono); font-size: 11px; color: var(--ink-500); margin-bottom: 3px; }
+.cc-tip .cc-r { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.cc-tip .cc-swatch { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+.cc-tip .cc-k { color: var(--ink-500); }
+.cc-tip .cc-v { margin-left: auto; padding-left: 14px; font-family: var(--mono); color: var(--ink-900); }
 /* 三档情景按目标逐行列出：名称一列，三档各一列，行与行之间靠目标名对齐 */
 .scen { margin-top: 12px; border-top: var(--rule); padding-top: 10px; display: flex; flex-direction: column; gap: 5px; }
 .scen-title { font-size: 11.5px; color: var(--ink-400); margin-bottom: 2px; }

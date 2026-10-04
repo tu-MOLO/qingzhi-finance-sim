@@ -440,6 +440,8 @@
     el("chart-reach").innerHTML = Charts.reach(reachCurves(sim), sim.months);
     el("chart-accounts").innerHTML = Charts.accounts(result.allocation, sim.months);
     el("chart-capacity").innerHTML = Charts.capacity(result.capacity, emergencyMonths());
+    /* 图表刚换过 svg，读数层要重新挂一次 */
+    Charts.mountCursors();
     renderLegends(result);
     renderScenario(result.scenarios, ordered);
 

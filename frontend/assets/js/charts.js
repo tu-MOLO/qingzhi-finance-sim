@@ -35,6 +35,11 @@
     var format = typeof tickText === "function" ? tickText : Fmt.tenThousand;
     var ink = token("--ink-300", "#A8A5AC");
     var out = "";
+    /* 纵向格线落在有月份标签的位置，横轴刻度才有对应的月份可对照 */
+    labels.forEach(function (item) {
+      out += '<line x1="' + item[0].toFixed(1) + '" y1="' + PADT + '" x2="' + item[0].toFixed(1) +
+        '" y2="' + (VH - PADB) + '" stroke="' + gridColor + '" stroke-width="1"/>';
+    });
     for (var i = 0; i <= count; i++) {
       var value = max * i / count;
       var y = py(value, max);
@@ -51,24 +56,78 @@
     }
     labels.forEach(function (item) {
       out += '<text x="' + item[0].toFixed(1) + '" y="' + (VH - 8) + '" font-size="10" fill="' +
-        ink + '" text-anchor="middle">' + Fmt.escapeHtml(item[1]) + "</text>";
+        ink + '" text-anchor="' + (item[2] || "middle") + '">' +
+        Fmt.escapeHtml(item[1]) + "</text>";
     });
     return out;
   }
 
-  /* 横轴刻度只取有效范围内的月份 */
+  /* 横轴刻度的步长只在几个整齐的月份数里挑，使标签不超过六处。
+     原先固定取第 1、24、48 月与末月，间隔忽长忽短，末月的标签还会被画布裁掉。 */
+  var MONTH_STEPS = [1, 2, 3, 6, 12, 24, 36, 60, 120];
+
+  function monthTicks(count) {
+    if (count <= 1) { return [0]; }
+    var step = MONTH_STEPS[MONTH_STEPS.length - 1];
+    for (var i = 0; i < MONTH_STEPS.length; i++) {
+      if ((count - 1) / MONTH_STEPS[i] <= 5) { step = MONTH_STEPS[i]; break; }
+    }
+    var marks = [];
+    for (var mark = 0; mark < count - 1; mark += step) { marks.push(mark); }
+    var last = count - 1;
+    /* 末月离前一个刻度太近就顶掉它，免得两个标签叠在一起 */
+    if (last - marks[marks.length - 1] < step * 0.6) { marks.pop(); }
+    marks.push(last);
+    return marks;
+  }
+
+  /* 横轴月份刻度。末月用右对齐，文字才不会被画布右缘切掉 */
   function monthLabels(count) {
-    var marks = [0, 23, 47, count - 1].filter(function (value, index, array) {
-      return value >= 0 && value < count && array.indexOf(value) === index;
-    });
-    return marks.map(function (mark) {
-      return [px(mark, count - 1), Catalog.text("chart.axis.month", { n: mark + 1 })];
+    return monthTicks(count).map(function (mark) {
+      return [px(mark, count - 1), Catalog.text("chart.axis.month", { n: mark + 1 }),
+        mark === count - 1 ? "end" : "middle"];
     });
   }
 
-  function svg(height, label, inner) {
+  function svg(height, label, inner, spec) {
     return '<svg viewBox="0 0 ' + VW + " " + height + '" role="img" aria-label="' +
-      Fmt.escapeHtml(label) + '">' + inner + "</svg>";
+      Fmt.escapeHtml(label) + '"' + cursorAttr(height, spec) + ">" + inner + "</svg>";
+  }
+
+  /* 悬停读数随图存放：各月的数值编进属性，鼠标事件在挂载时才绑。
+     放在属性里而不是模块变量，重绘换掉 innerHTML 后自然失效，不必手工清理。 */
+  function cursorAttr(height, spec) {
+    if (!spec) { return ""; }
+    spec.vh = height;
+    return ' data-cursor="' + Fmt.escapeHtml(JSON.stringify(spec)) + '"';
+  }
+
+  /* 单位在渲染时现取，不在模块载入时缓存：文案要等界面文案下发后才就位 */
+  function readUnit(format) {
+    if (format === "percent") { return Fmt.units.percent; }
+    if (format === "month") { return Fmt.units.month; }
+    return Fmt.units.wan;
+  }
+
+  function readValue(format, value) {
+    if (format === "percent") { return Fmt.percent(value); }
+    if (format === "month") { return Fmt.decimal(value, 1); }
+    return Fmt.tenThousand(value);
+  }
+
+  /* 读数与刻度同一套换算。区间只写一次单位，百分比不留空格 */
+  function readText(format, raw) {
+    var unit = readUnit(format);
+    if (raw instanceof Array) {
+      return readValue(format, raw[0]) + "–" + readValue(format, raw[1]) +
+        (format === "percent" ? "" : " " + unit);
+    }
+    return readValue(format, raw) + (format === "percent" ? "" : " " + unit);
+  }
+
+  /* 两条同长序列逐月配成区间，供分位带这类上下界的读数使用 */
+  function pairs(low, high) {
+    return low.map(function (value, index) { return [value, high[index]]; });
   }
 
   function band(sim) {
@@ -92,7 +151,17 @@
       '<path d="' + top + bottom + 'Z" fill="' + token("--chart-band", "#EBB6B7") + '" opacity="0.55"/>' +
       '<path d="' + middle + '" fill="none" stroke="' + token("--chart-line", "#B4121A") +
       '" stroke-width="2" stroke-linejoin="round"/>';
-    return svg(VH, Catalog.text("chart.band.title"), inner);
+    return svg(VH, Catalog.text("chart.band.title"), inner, {
+      months: months,
+      max: max,
+      format: "wan",
+      rows: [
+        { name: Catalog.text("chart.band.legend.range"), color: token("--chart-band", "#EBB6B7"),
+          values: pairs(p10, p90) },
+        { name: Catalog.text("chart.band.legend.median"), color: token("--chart-line", "#B4121A"),
+          values: p50 }
+      ]
+    });
   }
 
   function goalColor(probability) {
@@ -164,9 +233,19 @@
       }
       paths += '<path d="' + path + 'Z" fill="' + order[level].color + '"/>';
     }
+    /* 读数给每层的当月金额，累积值相减才是这一层自己的厚度 */
+    var rows = order.map(function (account, index) {
+      var values = [];
+      for (var m = 0; m < count; m++) {
+        var lower = index > 0 ? cumulative[m][order[index - 1].code] : 0;
+        values.push(cumulative[m][account.code] - lower);
+      }
+      return { name: account.name, color: account.color, values: values };
+    });
     return svg(VH, Catalog.text("chart.accounts.title"),
       axes(max, monthLabels(count), token("--chart-grid", "#EAE8EB"),
-        Fmt.units.wan) + paths);
+        Fmt.units.wan) + paths,
+      { months: count, max: max, format: "wan", rows: rows });
   }
 
   /* 容量日历：安全垫厚度折线，虚线上方为应急金目标 */
@@ -178,13 +257,8 @@
     var max = Math.max(emergencyMonths * 1.6, Math.max.apply(null, values), 0.1);
     var grid = token("--chart-grid", "#EAE8EB");
     var line = token("--chart-line", "#B4121A");
-    var marks = [0, 11, count - 1].filter(function (value, index, array) {
-      return value >= 0 && value < count && array.indexOf(value) === index;
-    }).map(function (mark) {
-      return [px(mark, count - 1), Catalog.text("chart.axis.month", { n: mark + 1 })];
-    });
     /* 日历的纵轴是安全垫厚度，按原值保留一位小数，不换算成万元 */
-    var out = axes(max, marks, grid, Fmt.units.month, function (value) {
+    var out = axes(max, monthLabels(count), grid, Fmt.units.month, function (value) {
       return value.toFixed(1);
     });
 
@@ -217,7 +291,12 @@
       token("--ink-300", "#A8A5AC") + '">' +
       Fmt.escapeHtml(Catalog.text("chart.capacity.range_note", { n: count })) + "</text>";
 
-    return svg(VH + 18, Catalog.text("chart.capacity.title"), out);
+    return svg(VH + 18, Catalog.text("chart.capacity.title"), out, {
+      months: count,
+      max: max,
+      format: "month",
+      rows: [{ name: Catalog.text("chart.capacity.legend.cushion"), color: line, values: values }]
+    });
   }
 
   /* ---------------------------------------------------------- 逐路径明细
@@ -276,7 +355,13 @@
         Fmt.escapeHtml(Catalog.text("chart.paths.grounded", { n: Fmt.number(grounded) })) +
         "</text>";
     }
-    return svg(VH + 18, Catalog.text("chart.paths.title"), out);
+    return svg(VH + 18, Catalog.text("chart.paths.title"), out, {
+      months: months,
+      max: max,
+      format: "wan",
+      rows: [{ name: Catalog.text("chart.paths.legend.median"),
+        color: token("--chart-line", "#B4121A"), values: sim.balancePercentiles.p50 }]
+    });
   }
 
   /* 期末余额分布：把全部路径的期末余额分格计数。
@@ -378,12 +463,142 @@
 
     out += '<text x="' + PADL + '" y="' + (VH + 12) + '" font-size="10" fill="' + ink300 + '">' +
       Fmt.escapeHtml(Catalog.text("chart.reach.dot_note")) + "</text>";
-    return svg(VH + 18, Catalog.text("chart.reach.title"), out);
+    return svg(VH + 18, Catalog.text("chart.reach.title"), out, {
+      months: months,
+      max: 1,
+      format: "percent",
+      rows: list.map(function (item, index) {
+        return { name: item.name, color: reachColor(index), values: item.curve };
+      })
+    });
+  }
+
+  /* ---------------------------------------------------------- 悬停读数
+
+     刻度只有四五处，具体某个月落在多少读不出来。鼠标移到图上时，
+     在最接近的那个月画一条竖线并列出当月的各条数值。
+     竖线与读数框都压在图上且不吃鼠标事件，否则指针一进框就会触发
+     mouseleave，画面来回闪。 */
+
+  function mountCursors() {
+    Array.prototype.forEach.call(document.querySelectorAll("svg[data-cursor]"), function (node) {
+      if (node.dataset.cursorBound) { return; }
+      var spec = null;
+      try { spec = JSON.parse(node.getAttribute("data-cursor")); } catch (error) { spec = null; }
+      if (!spec || !spec.months || !spec.rows || !spec.rows.length) { return; }
+      node.dataset.cursorBound = "1";
+      bindCursor(node, spec);
+    });
+  }
+
+  function bindCursor(node, spec) {
+    var box = node.parentElement;
+    if (!box) { return; }
+    /* 重绘只在同一张图上换 svg，旧的两层还留在盒子里，先清掉 */
+    Array.prototype.slice.call(box.children).forEach(function (child) {
+      if (child.classList.contains("cc-layer") || child.classList.contains("cc-tip")) {
+        box.removeChild(child);
+      }
+    });
+    box.classList.add("chart-live");
+
+    var layer = document.createElement("div");
+    layer.className = "cc-layer";
+    layer.hidden = true;
+    var line = document.createElement("i");
+    line.className = "cc-line";
+    line.style.top = (PADT / spec.vh * 100) + "%";
+    line.style.height = ((VH - PADB - PADT) / spec.vh * 100) + "%";
+    layer.appendChild(line);
+
+    /* 每行一个圆点、区间行两个，随光标改位置，不逐月预建 */
+    var dots = spec.rows.map(function (row) {
+      var slots = row.values[0] instanceof Array ? 2 : 1;
+      var list = [];
+      for (var i = 0; i < slots; i++) {
+        var dot = document.createElement("i");
+        dot.className = "cc-dot";
+        dot.style.background = row.color;
+        layer.appendChild(dot);
+        list.push(dot);
+      }
+      return list;
+    });
+
+    var tip = document.createElement("div");
+    tip.className = "cc-tip";
+    tip.hidden = true;
+    box.appendChild(layer);
+    box.appendChild(tip);
+
+    /* 读数框与图共用同一个盒子。盒子被整体重绘、或别处误删了这一层时，
+       下一次移动就把它补回来——否则线和点还在动，数字却悄悄没了 */
+    function ensureAttached() {
+      if (layer.parentElement !== box) { box.appendChild(layer); }
+      if (tip.parentElement !== box) { box.appendChild(tip); }
+    }
+
+    function tipHtml(index) {
+      var html = '<div class="cc-h">' +
+        Fmt.escapeHtml(Catalog.text("chart.axis.month", { n: index + 1 })) + "</div>";
+      spec.rows.forEach(function (row) {
+        var raw = row.values[index];
+        if (raw === null || raw === undefined) { return; }
+        html += '<div class="cc-r"><i class="cc-swatch" style="background:' +
+          Fmt.escapeHtml(row.color) + '"></i><span class="cc-k">' + Fmt.escapeHtml(row.name) +
+          '</span><span class="cc-v">' + Fmt.escapeHtml(readText(spec.format, raw)) +
+          "</span></div>";
+      });
+      return html;
+    }
+
+    function onMove(event) {
+      var rect = node.getBoundingClientRect();
+      if (!rect.width) { return; }
+      var ratio = spec.months <= 1 ? 0 :
+        ((event.clientX - rect.left) * VW / rect.width - PADL) / (VW - PADL - PADR);
+      var index = Math.round(Math.min(1, Math.max(0, ratio)) * (spec.months - 1));
+      var x = px(index, spec.months - 1);
+      var left = (x / VW * 100) + "%";
+      /* 先把读数填好再摆线点：万一后续哪一步出错，数值也已经在了 */
+      ensureAttached();
+      tip.innerHTML = tipHtml(index);
+      tip.hidden = false;
+      layer.hidden = false;
+      line.style.left = left;
+      spec.rows.forEach(function (row, rowIndex) {
+        var raw = row.values[index];
+        dots[rowIndex].forEach(function (dot, slot) {
+          var value = Number(raw instanceof Array ? raw[slot] : raw) || 0;
+          dot.style.left = left;
+          dot.style.top = (py(value, spec.max, spec.min) / spec.vh * 100) + "%";
+        });
+      });
+      /* 贴到右缘时把读数框翻到光标左侧，免得被卡片裁掉 */
+      if (x > VW * 0.58) {
+        tip.style.left = "auto";
+        tip.style.right = ((VW - x) / VW * 100) + "%";
+        tip.classList.add("cc-flip");
+      } else {
+        tip.style.right = "auto";
+        tip.style.left = left;
+        tip.classList.remove("cc-flip");
+      }
+    }
+
+    function onLeave() {
+      layer.hidden = true;
+      tip.hidden = true;
+    }
+
+    node.addEventListener("mousemove", onMove);
+    node.addEventListener("mouseleave", onLeave);
   }
 
   global.App = global.App || {};
   global.App.Charts = {
     band: band,
+    mountCursors: mountCursors,
     paths: paths,
     histogram: histogram,
     reach: reach,
