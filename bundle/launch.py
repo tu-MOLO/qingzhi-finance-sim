@@ -12,6 +12,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import socket
 import sys
 import threading
@@ -34,10 +35,8 @@ def _utf8_console() -> None:
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure is None:
             continue
-        try:
+        with contextlib.suppress(ValueError, OSError):
             reconfigure(encoding="utf-8", errors="replace")
-        except (ValueError, OSError):
-            pass
 
 
 def _in_use(host: str, port: int) -> bool:
@@ -74,11 +73,9 @@ def pick_port(host: str, preferred: int) -> int:
 
 def open_later(url: str) -> None:
     def run():
-        try:
+        # 打不开也不影响服务本身，使用者照着地址栏手输即可
+        with contextlib.suppress(OSError, webbrowser.Error):
             webbrowser.open(url)
-        except Exception:
-            # 打不开也不影响服务本身，使用者照着地址栏手输即可
-            pass
     threading.Timer(_OPEN_DELAY, run).start()
 
 

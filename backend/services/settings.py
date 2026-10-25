@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import os
 import sqlite3
 from pathlib import Path
@@ -16,7 +17,7 @@ from .. import config as C
 from ..common.errors import AppError, ValidationError
 from ..db import connection
 from ..db.repository import base as repo_base
-from .configuration import Catalog, invalidate, get_catalog
+from .configuration import Catalog, get_catalog, invalidate
 
 # 允许从设置页直接改写的配置项。想加项只能改这份白名单，
 # 免得推演口径（路径条数、容差、求解上限）被当成随便填的输入框。
@@ -114,7 +115,7 @@ def write_api_key(settings: dict, value: str) -> None:
             continue
         kept.append(line)
     # 注释头只在文件尚无注释时补写，避免每次保存都堆一行
-    has_comment = any((line.strip().startswith("#") for line in kept))
+    has_comment = any(line.strip().startswith("#") for line in kept)
     if token:
         if kept and kept[-1].strip():
             kept.append("")
@@ -125,11 +126,9 @@ def write_api_key(settings: dict, value: str) -> None:
         text += "\n"
     try:
         ENV_FILE.write_text(text, encoding="utf-8")
-        try:
+        with contextlib.suppress(OSError):
             # 凭据文件只对当前用户可读，Windows 上权限位支持有限，失败就按系统默认
             os.chmod(ENV_FILE, 0o600)
-        except OSError:
-            pass
     except OSError as exc:
         raise AppError("C-03-01", "凭据文件写入失败，请检查运行目录的写入权限") from exc
 

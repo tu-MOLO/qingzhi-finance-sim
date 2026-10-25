@@ -6,6 +6,8 @@
 
 ## 快速开始
 
+需要 Python 3.11 及以上。依赖只有 Flask 与 numpy，pytest 与 ruff 仅用于检查。
+
 ```bash
 pip install -r requirements.txt
 python run.py
@@ -21,6 +23,22 @@ python run.py --port 8080    # 指定端口
 
 数据库文件损坏时，程序会把它改名留存再重建，不会在启动阶段崩溃。
 
+### 打包为可执行文件
+
+`bundle/launch.py` 是打包版的入口，比 `run.py` 多做三件事：从 8000 起向上找一个空闲端口、服务起来后自动打开浏览器、把控制台输出切到 UTF-8。窗口关掉即停止服务。
+
+```bash
+pip install pyinstaller
+
+# 单目录：启动快，产物是一整个文件夹
+python -m PyInstaller bundle/launcher.spec --noconfirm
+
+# 单文件：拷走一个 exe 就能用，冷启动稍慢
+python -m PyInstaller bundle/launcher-onefile.spec --noconfirm --distpath dist/onefile
+```
+
+两种模式的产物互不覆盖。数据库落点在可执行文件同级目录而不是解包临时目录，单文件模式下次启动仍读得到上次的数据。
+
 ## 分层结构
 
 ```
@@ -28,7 +46,7 @@ frontend/            前端层
   index.html         页面结构。不含任何可见文案
   assets/css/        设计变量与组件样式
   assets/js/         接口客户端、配置目录、格式化、图表
-  assets/js/views/   三个页面的渲染逻辑
+  assets/js/views/   四个页签与两块面板的渲染逻辑
 
 backend/             后端层
   main.py            启动入口
@@ -45,7 +63,12 @@ database/            数据库层
   seeds/             业务数据的唯一来源
   var/               运行期库文件（不入版本控制）
 
-docs/                文档
+bundle/              打包配置
+  launch.py          可执行版入口：选端口、开浏览器、UTF-8 控制台
+  launcher.spec      单目录模式
+  launcher-onefile.spec  单文件模式
+
+docs/                交付文档，不随仓库分发
 tests/               测试，分 backend、api、data 三组
 ```
 
@@ -57,8 +80,9 @@ tests/               测试，分 backend、api、data 三组
   │  ② 录入：POST /api/v1/profile/preview  结余预览（期望收入口径在服务端）
   │  ③ 推演：POST /api/v1/simulation/run   完整结果
   │  ④ 决策：POST /api/v1/simulation/plan  针对某一目标求解二选一方案
-  │  ⑤ 解释：POST /api/v1/terms/explain    术语三层解释
-  │  ⑥ 解读：POST /api/v1/agents/<code>/run  任意智能体的统一入口
+  │  ⑤ 反事实：POST /api/v1/simulation/whatif  单参数上下扰动，按影响幅度排序
+  │  ⑥ 解释：POST /api/v1/terms/explain    术语三层解释
+  │  ⑦ 解读：POST /api/v1/agents/<code>/run  任意智能体的统一入口
   ▼
 接口层        解析与校验请求、限流、响应头加固；不含业务规则，不接触数据库
   ▼
@@ -131,7 +155,13 @@ database/var/qingzhi.db
 
 ### 新增一个智能体
 
-只需要改数据：往 `agents` 表加一条定义，往 `agent_bindings` 表绑定已有工具。代码里的工具处理器与本地渲染器都不用动。若绑定了代码中没有实现的处理器，运行期会直接失败——自检接口 `GET /api/v1/agents` 与测试都会暴露出来。
+三处要动，只有第一处是纯数据：
+
+- **定义**：往 `agents` 表加一条记录，声明输出结构与语料范围；往 `agent_bindings` 表绑定工具。工具按 `handler` 名查找，现成的处理器可以直接复用，不必新写。
+- **渲染器**：`backend/agents/providers.py` 的 `RENDERERS` 按 code 注册本地渲染函数。本地规则路径要有人说人话，这一环跳不过去；缺注册时调用直接抛错，不会返回半成品。
+- **调用点**：界面上每个智能体都有明确落位，要把新的摆上页面，还得在前端加一处调用。
+
+自检守在测试里：`tests/backend/test_agents.py` 会检出「绑定了代码中没有实现的处理器」与「启用却没有绑定任何工具」两类问题。
 
 ## 数据分层与接口
 
@@ -143,7 +173,7 @@ database/var/qingzhi.db
 | 模型参数与来源 | model_params、data_sources | `/api/v1/catalog/parameters` |
 | 文案 | ui_texts、messages | `/api/v1/catalog/ui-texts`、`/api/v1/catalog/messages` |
 | 智能体 | agents、agent_tools、agent_bindings | `/api/v1/agents`、`/api/v1/agent-tools` |
-| 业务实体 | archetypes 及两张子表、terms 三张表、corpus_documents | `/api/v1/archetypes`、`/api/v1/terms`、`/api/v1/corpus-documents` |
+| 业务实体 | archetypes 及三张子表、terms 三张表、corpus_documents | `/api/v1/archetypes`、`/api/v1/terms`、`/api/v1/corpus-documents` |
 
 写入示例：
 
@@ -199,7 +229,7 @@ curl -X PUT http://127.0.0.1:8000/api/v1/catalog/settings \
 
 **为什么用 SQLite。** 单机单进程、无并发写入、无远程访问，嵌入式数据库足够，且省掉一个需要单独部署的进程。参数需要人工核对来源，因此提供接口而非直接改文件，改动会留痕。
 
-**为什么前端不用框架。** 三个页面、四张图表、一次接口往返即可完成初始化，引入构建工具带来的复杂度高于收益。前端不承担任何业务计算。
+**为什么前端不用框架。** 四个页签、七张图表、一次 catalog 往返即可完成初始化，引入构建工具带来的复杂度高于收益。前端不承担任何业务计算。
 
 **为什么前端不出现文案。** 页面里只有 `data-text` 占位键，所有可见文字、枚举选项、配色、图表标题都由接口下发。这样改文案不需要动代码，也使得「前端不含业务数据」成为可以自动检查的约束。
 
@@ -210,7 +240,7 @@ curl -X PUT http://127.0.0.1:8000/api/v1/catalog/settings \
 1. 术语语料是按公开披露制度与现行制度的要素整理的要点，不是某一产品的原文，也不逐字引用条文。若需要引用具体产品，应替换为该产品的官方文件并登记来源与获取日期。
 2. 参数表中若干条目的来源描述只到报告名称，未到年份、样本量与可引用位置。
 3. 目标达成以全部储蓄余额为口径，未区分安全底座与长期复利。
-4. 账户分配顺序与需求原文的表述不同，理由见上文「账户顺序决定谁能分到钱」。
+4. 账户分配顺序与最初的需求表述不同，理由见上文「账户顺序决定谁能分到钱」。
 5. 外部模型路径默认关闭。开启后需要自行准备服务端点与凭据，凭据只从环境变量读取。
 
 ## 检查与测试
@@ -218,8 +248,12 @@ curl -X PUT http://127.0.0.1:8000/api/v1/catalog/settings \
 ```bash
 python -m pytest          # 单元、接口与数据一致性
 python -m ruff check .    # 静态分析
-node --check frontend/assets/js/main.js
+
+# 前端是浏览器脚本，只查语法
+for f in frontend/assets/js/*.js frontend/assets/js/views/*.js; do node --check "$f"; done
 ```
+
+测试库不存在时会先按种子建一份，不依赖本机已有的数据。
 
 `tests/data/` 下有一组静态检查，是「业务数据只来自数据库」的守门人：
 

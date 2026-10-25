@@ -23,8 +23,14 @@ DATABASE = ROOT / "database" / "var" / "qingzhi.db"
 # 不允许出现在产品代码、界面文案与目录命名中的字样
 BANNED_WORDS = ("工行杯", "大赛", "参赛")
 
-# 只有交付说明可以记录赛事背景
-COMPETITION_DOC = "交付说明.md"
+# 赛事材料的文件名（去扩展名）。产品代码与产品文档不得混入赛事字样，
+# 赛事材料本身按交付流程单独分发、不随仓库走；万一被放回 docs 目录，
+# 名字必须对得上这份登记表，以免出现一份未登记的材料。
+COMPETITION_DOCS = (
+    "交付说明",
+    "工行杯参赛规则与技巧调研",
+    "青智方舟-参赛项目方案报告",
+)
 
 
 def _backend_sources() -> list[Path]:
@@ -58,15 +64,28 @@ def test_no_competition_wording_in_seeds():
 
 def test_no_competition_wording_in_docs():
     for path in (ROOT / "docs").glob("*.md"):
-        if path.name == COMPETITION_DOC:
+        if path.stem in COMPETITION_DOCS:
             continue
         text = path.read_text(encoding="utf-8")
         for word in BANNED_WORDS:
             assert word not in text, f"{path} 含有赛事字样：{word}"
 
 
-def test_competition_doc_exists():
-    assert (ROOT / "docs" / COMPETITION_DOC).exists()
+def test_competition_doc_names_registered():
+    """docs 目录里若出现赛事材料，文件名必须在登记表内。
+
+    这条断言管的不是「有没有」，而是「叫什么」。赛事材料按交付流程单独分发，
+    不随仓库走；万一有人把它放回 docs，名字越界就说明多了一份未被登记的材料。
+    """
+    docs = ROOT / "docs"
+    for path in docs.iterdir() if docs.is_dir() else []:
+        if path.is_dir() or path.name.startswith("."):
+            continue
+        if not any(word in path.name for word in BANNED_WORDS):
+            continue
+        assert path.stem in COMPETITION_DOCS, (
+            f"{path.name} 含赛事字样但未登记，允许的名称："
+            + " / ".join(COMPETITION_DOCS))
 
 
 def test_directory_names_clean():

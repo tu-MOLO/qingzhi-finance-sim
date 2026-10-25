@@ -50,6 +50,14 @@ results/
 logs/
 *.log
 
+# 文档排版流水线的工作目录与调试快照
+output/
+shotprof.json
+
+# 交付文档按流程单独分发，不随仓库走
+docs/*.docx
+docs/*.pdf
+
 # 本地环境与凭据
 .env
 .env.*
